@@ -10,7 +10,7 @@ class ViewControllerModel {
     weak var delegate: ViewControllerModelDelegate?
 
     func fetchWeatherForCity(_ city: String) {
-        ApiManager.shared.fetchWeather(forCity: city) { [weak self] result in
+        APIManager.shared.fetchWeather(forCity: city) { [weak self] result in
             switch result {
             case .success(let weather):
                 self?.delegate?.didFetchWeather(weather: weather)

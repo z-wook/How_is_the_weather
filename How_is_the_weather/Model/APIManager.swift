@@ -1,10 +1,11 @@
 import Alamofire
 import SwiftyJSON
 
-class ApiManager {
-    static let shared = ApiManager()
+class APIManager {
+    static let shared = APIManager()
 
     private let apiKey = ""
+
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather"
 
     private init() {}
@@ -44,4 +45,20 @@ struct Weather {
         self.description = description.capitalized
         self.temperature = temperature
     }
+    
+}
+
+struct TestFunction {
+    
+    func testAPI() {
+        APIManager.shared.fetchWeather(forCity: "Seoul") { result in
+            switch result {
+            case .success(let weather):
+                print("Successfully fetched weather for Seoul: \(weather.description), \(weather.temperature)°C")
+            case .failure(let error):
+                print("Failed to fetch weather for Seoul: \(error.localizedDescription)")
+            }
+        }
+    }
+
 }

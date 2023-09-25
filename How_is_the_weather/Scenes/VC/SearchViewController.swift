@@ -1,5 +1,5 @@
 //
-//  GlobalDetailViewController.swift
+//  SearchViewController.swift
 //  How_is_the_weather
 //
 //  Copyright (c) 2023 z-wook. All right reserved.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class GlobalDetailViewController: UIViewController {
-    
+final class SearchViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,6 +16,6 @@ final class GlobalDetailViewController: UIViewController {
     }
     
     deinit {
-        print("deinit - GlobalDetailVC")
+        print("deinit - GlobalVC")
     }
 }

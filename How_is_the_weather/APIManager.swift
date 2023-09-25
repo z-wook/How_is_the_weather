@@ -4,7 +4,7 @@ import SwiftyJSON
 class ApiManager {
 
     static let shared = ApiManager()
-    private let apiKey = "secret"
+    private let apiKey = Storage().apiKey
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather"
 
     private init() {}

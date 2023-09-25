@@ -11,6 +11,7 @@
 		084288A72AC136BC000B6DDA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 084288A62AC136BC000B6DDA /* Alamofire */; };
 		084288AA2AC136CD000B6DDA /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 084288A92AC136CD000B6DDA /* SwiftyJSON */; };
 		084288B02AC14764000B6DDA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084288AF2AC14764000B6DDA /* Storage.swift */; };
+		084288B22AC14A63000B6DDA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084288B12AC14A63000B6DDA /* Storage.swift */; };
 		33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */; };
 		33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */; };
 		33C98C942AC12ACB00B041A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C932AC12ACB00B041A0 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		084288A32AC1351E000B6DDA /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		084288AF2AC14764000B6DDA /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		084288B12AC14A63000B6DDA /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		33C98C8C2AC12ACB00B041A0 /* How_is_the_weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = How_is_the_weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				33C98C982AC12ACC00B041A0 /* Assets.xcassets */,
 				33C98C9A2AC12ACC00B041A0 /* LaunchScreen.storyboard */,
 				33C98C9D2AC12ACC00B041A0 /* Info.plist */,
+				084288B12AC14A63000B6DDA /* Storage.swift */,
 			);
 			path = How_is_the_weather;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 				33C98C942AC12ACB00B041A0 /* ViewController.swift in Sources */,
 				33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */,
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
+				084288B22AC14A63000B6DDA /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

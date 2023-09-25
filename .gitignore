@@ -59,4 +59,6 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 Storage.swift
+Store.swift
+
 # End of https://www.toptal.com/developers/gitignore/api/macos

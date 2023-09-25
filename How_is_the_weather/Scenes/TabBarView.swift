@@ -18,7 +18,7 @@ final class TabBarView: UIView {
     
     lazy var globalBtn: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "globe.asia.australia"), for: .normal)
+        button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         button.tintColor = .systemGray
         return button
     }()

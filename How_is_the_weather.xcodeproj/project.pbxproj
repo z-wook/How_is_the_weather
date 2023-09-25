@@ -16,9 +16,7 @@
 		33F8A1B02AC13773000309FB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1AF2AC13773000309FB /* TabBarView.swift */; };
 		33F8A1B22AC138BC000309FB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B12AC138BC000309FB /* TabBarController.swift */; };
 		33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B32AC13C0C000309FB /* HomeViewController.swift */; };
-		33F8A1B82AC13DFA000309FB /* GlobalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B72AC13DFA000309FB /* GlobalViewController.swift */; };
-		33F8A1BC2AC13F4F000309FB /* HomeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1BB2AC13F4F000309FB /* HomeDetailViewController.swift */; };
-		33F8A1BE2AC14613000309FB /* GlobalDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1BD2AC14613000309FB /* GlobalDetailViewController.swift */; };
+		33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B72AC13DFA000309FB /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +29,7 @@
 		33F8A1AF2AC13773000309FB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		33F8A1B12AC138BC000309FB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		33F8A1B32AC13C0C000309FB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		33F8A1B72AC13DFA000309FB /* GlobalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewController.swift; sourceTree = "<group>"; };
-		33F8A1BB2AC13F4F000309FB /* HomeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDetailViewController.swift; sourceTree = "<group>"; };
-		33F8A1BD2AC14613000309FB /* GlobalDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalDetailViewController.swift; sourceTree = "<group>"; };
+		33F8A1B72AC13DFA000309FB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,9 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				33F8A1B32AC13C0C000309FB /* HomeViewController.swift */,
-				33F8A1BB2AC13F4F000309FB /* HomeDetailViewController.swift */,
-				33F8A1B72AC13DFA000309FB /* GlobalViewController.swift */,
-				33F8A1BD2AC14613000309FB /* GlobalDetailViewController.swift */,
+				33F8A1B72AC13DFA000309FB /* SearchViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -178,12 +172,10 @@
 			files = (
 				33F8A1B22AC138BC000309FB /* TabBarController.swift in Sources */,
 				33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */,
-				33F8A1B82AC13DFA000309FB /* GlobalViewController.swift in Sources */,
+				33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */,
 				33F8A1B02AC13773000309FB /* TabBarView.swift in Sources */,
-				33F8A1BE2AC14613000309FB /* GlobalDetailViewController.swift in Sources */,
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
 				33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */,
-				33F8A1BC2AC13F4F000309FB /* HomeDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

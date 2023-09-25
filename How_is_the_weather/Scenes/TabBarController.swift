@@ -12,27 +12,7 @@ final class TabBarController: UITabBarController {
     
     private let tabBarView = TabBarView()
     private let homeVC = HomeViewController()
-    private let globalVC = GlobalViewController()
-    
-    private lazy var homeBarButtonItem: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            title: "홈디테일",
-            style: .plain,
-            target: self,
-            action: #selector(moveHomeDetailVC)
-        )
-        return button
-    }()
-    
-    private lazy var globalBarButtonItem: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            title: "글로벌디테일",
-            style: .plain,
-            target: self,
-            action: #selector(moveGlobalDetailVC)
-        )
-        return button
-    }()
+    private let globalVC = SearchViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +28,6 @@ private extension TabBarController {
         tabBar.isHidden = true
         navigationItem.title = "날씨어때"
         view.backgroundColor = .systemBackground
-        navigationItem.rightBarButtonItem = homeBarButtonItem
         viewControllers = [homeVC, globalVC]
     }
     
@@ -76,24 +55,12 @@ private extension TabBarController {
     @objc func didTappedHome() {
         selectedIndex = 0
         navigationItem.title = "날씨"
-        navigationItem.rightBarButtonItem = homeBarButtonItem
         changeTintColor(buttonType: tabBarView.sunBtn)
     }
     
     @objc func didTappedMyPage() {
         selectedIndex = 1
-        navigationItem.title = "글로벌"
-        navigationItem.rightBarButtonItem = globalBarButtonItem
+        navigationItem.title = "검색"
         changeTintColor(buttonType: tabBarView.globalBtn)
-    }
-    
-    @objc func moveHomeDetailVC() {
-        let vc = HomeDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @objc func moveGlobalDetailVC() {
-        let vc = GlobalDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
     }
 }

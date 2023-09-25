@@ -5,7 +5,7 @@ class APIManager {
     
     static let shared = APIManager()
 
-    private let apiKey = Storage().API_KEY
+    private let apiKey = Store().API_KEY
 
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather"
 

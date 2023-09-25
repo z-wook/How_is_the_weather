@@ -11,6 +11,7 @@
 		08B7D0AD2AC174140019DD9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0AC2AC174140019DD9F /* Alamofire */; };
 		08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0AF2AC1742E0019DD9F /* APIManager.swift */; };
 		08B7D0B32AC1744F0019DD9F /* ViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0B22AC1744F0019DD9F /* ViewControllerModel.swift */; };
+		08B7D0B52AC195570019DD9F /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0B42AC195570019DD9F /* Storage.swift */; };
 		33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */; };
 		33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */; };
 		33C98C992AC12ACC00B041A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33C98C982AC12ACC00B041A0 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		08B7D0AF2AC1742E0019DD9F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		08B7D0B22AC1744F0019DD9F /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
+		08B7D0B42AC195570019DD9F /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		33C98C8C2AC12ACB00B041A0 /* How_is_the_weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = How_is_the_weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				08B7D0AF2AC1742E0019DD9F /* APIManager.swift */,
+				08B7D0B42AC195570019DD9F /* Storage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */,
 				33F8A1B02AC13773000309FB /* TabBarView.swift in Sources */,
 				08B7D0B32AC1744F0019DD9F /* ViewControllerModel.swift in Sources */,
+				08B7D0B52AC195570019DD9F /* Storage.swift in Sources */,
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
 				33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */,
 				08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */,

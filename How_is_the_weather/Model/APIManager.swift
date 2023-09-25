@@ -2,9 +2,10 @@ import Alamofire
 import SwiftyJSON
 
 class APIManager {
+    
     static let shared = APIManager()
 
-    private let apiKey = ""
+    private let apiKey = Storage().API_KEY
 
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather"
 

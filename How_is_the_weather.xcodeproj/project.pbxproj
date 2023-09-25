@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08B7D09E2AC16E3A0019DD9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D09D2AC16E3A0019DD9F /* Alamofire */; };
+		08B7D0A12AC16E420019DD9F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0A02AC16E420019DD9F /* SwiftyJSON */; };
+		08B7D0A32AC16E6A0019DD9F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0A22AC16E6A0019DD9F /* APIManager.swift */; };
+		08B7D0A62AC16E8B0019DD9F /* ViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0A52AC16E8B0019DD9F /* ViewControllerModel.swift */; };
 		33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */; };
 		33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */; };
 		33C98C992AC12ACC00B041A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33C98C982AC12ACC00B041A0 /* Assets.xcassets */; };
@@ -20,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08B7D0A22AC16E6A0019DD9F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		08B7D0A52AC16E8B0019DD9F /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
 		33C98C8C2AC12ACB00B041A0 /* How_is_the_weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = How_is_the_weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,7 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B7D09E2AC16E3A0019DD9F /* Alamofire in Frameworks */,
 				33F8A1AC2AC13741000309FB /* SnapKit in Frameworks */,
+				08B7D0A12AC16E420019DD9F /* SwiftyJSON in Frameworks */,
 				33F8A1AE2AC13741000309FB /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,6 +53,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08B7D0A42AC16E770019DD9F /* VCModel */ = {
+			isa = PBXGroup;
+			children = (
+				08B7D0A52AC16E8B0019DD9F /* ViewControllerModel.swift */,
+			);
+			path = VCModel;
+			sourceTree = "<group>";
+		};
+		08B7D0A72AC16E920019DD9F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08B7D0A22AC16E6A0019DD9F /* APIManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		33C98C832AC12ACB00B041A0 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +90,7 @@
 			children = (
 				33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */,
 				33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */,
+				08B7D0A72AC16E920019DD9F /* Model */,
 				33F8A1B92AC13E17000309FB /* Scenes */,
 				33C98C982AC12ACC00B041A0 /* Assets.xcassets */,
 				33C98C9A2AC12ACC00B041A0 /* LaunchScreen.storyboard */,
@@ -80,6 +105,7 @@
 				33F8A1AF2AC13773000309FB /* TabBarView.swift */,
 				33F8A1B12AC138BC000309FB /* TabBarController.swift */,
 				33F8A1BA2AC13E22000309FB /* VC */,
+				08B7D0A42AC16E770019DD9F /* VCModel */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -112,6 +138,8 @@
 			packageProductDependencies = (
 				33F8A1AB2AC13741000309FB /* SnapKit */,
 				33F8A1AD2AC13741000309FB /* SnapKit-Dynamic */,
+				08B7D09D2AC16E3A0019DD9F /* Alamofire */,
+				08B7D0A02AC16E420019DD9F /* SwiftyJSON */,
 			);
 			productName = How_is_the_weather;
 			productReference = 33C98C8C2AC12ACB00B041A0 /* How_is_the_weather.app */;
@@ -143,6 +171,8 @@
 			mainGroup = 33C98C832AC12ACB00B041A0;
 			packageReferences = (
 				33F8A1AA2AC13741000309FB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				08B7D09C2AC16E3A0019DD9F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				08B7D09F2AC16E420019DD9F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 33C98C8D2AC12ACB00B041A0 /* Products */;
 			projectDirPath = "";
@@ -170,9 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B7D0A32AC16E6A0019DD9F /* APIManager.swift in Sources */,
 				33F8A1B22AC138BC000309FB /* TabBarController.swift in Sources */,
 				33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */,
 				33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */,
+				08B7D0A62AC16E8B0019DD9F /* ViewControllerModel.swift in Sources */,
 				33F8A1B02AC13773000309FB /* TabBarView.swift in Sources */,
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
 				33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */,
@@ -390,6 +422,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		08B7D09C2AC16E3A0019DD9F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+		08B7D09F2AC16E420019DD9F /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		33F8A1AA2AC13741000309FB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -401,6 +449,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		08B7D09D2AC16E3A0019DD9F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08B7D09C2AC16E3A0019DD9F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		08B7D0A02AC16E420019DD9F /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08B7D09F2AC16E420019DD9F /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		33F8A1AB2AC13741000309FB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 33F8A1AA2AC13741000309FB /* XCRemoteSwiftPackageReference "SnapKit" */;

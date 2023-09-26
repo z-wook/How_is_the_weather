@@ -10,9 +10,9 @@ import SnapKit
 
 final class TabBarController: UITabBarController {
     
-    private let tabBarView = TabBarView()
-    private let homeVC = HomeViewController()
-    private let globalVC = SearchViewController()
+     private let tabBarView = TabBarView()
+     private let homeVC = HomeViewController()
+     private let globalVC = SearchViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

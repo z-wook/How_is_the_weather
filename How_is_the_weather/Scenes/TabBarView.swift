@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 final class TabBarView: UIView {
-    private lazy var sunBtn: UIButton = {
+    lazy var sunBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "sun.haze"), for: .normal)
         button.tintColor = .systemRed
         return button
     }()
     
-    private lazy var globalBtn: UIButton = {
+    lazy var globalBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         button.tintColor = .systemGray

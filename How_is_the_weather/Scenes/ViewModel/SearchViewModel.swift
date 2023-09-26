@@ -6,3 +6,28 @@
 //
 
 import Foundation
+
+final class SearchViewModel {
+    
+    let titles: [String] = [
+        "서울",
+        "부산",
+        "대전",
+        "울산",
+        "광주",
+        "대구",
+        "판교",
+        "안동",
+        "양산"
+    ]
+    
+    var textFieldtext: String? = ""
+}
+
+extension SearchViewModel {
+    var getWeather: String {
+        
+        
+        return ""
+    }
+}

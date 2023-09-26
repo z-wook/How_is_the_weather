@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		3363D90E2AC1B32F00265FBC /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363D90D2AC1B32F00265FBC /* WeatherCell.swift */; };
+		08B7D0AA2AC1740C0019DD9F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0A92AC1740C0019DD9F /* SwiftyJSON */; };
+		08B7D0AD2AC174140019DD9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0AC2AC174140019DD9F /* Alamofire */; };
+		08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0AF2AC1742E0019DD9F /* APIManager.swift */; };
+		08B7D0B32AC1744F0019DD9F /* ViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0B22AC1744F0019DD9F /* ViewControllerModel.swift */; };
+		08B7D0B72AC199240019DD9F /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0B62AC199240019DD9F /* Store.swift */; };
 		33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */; };
 		33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */; };
 		33C98C992AC12ACC00B041A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33C98C982AC12ACC00B041A0 /* Assets.xcassets */; };
@@ -24,6 +29,9 @@
 
 /* Begin PBXFileReference section */
 		3363D90D2AC1B32F00265FBC /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		08B7D0AF2AC1742E0019DD9F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		08B7D0B22AC1744F0019DD9F /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
+		08B7D0B62AC199240019DD9F /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		33C98C8C2AC12ACB00B041A0 /* How_is_the_weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = How_is_the_weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08B7D0AA2AC1740C0019DD9F /* SwiftyJSON in Frameworks */,
+				08B7D0AD2AC174140019DD9F /* Alamofire in Frameworks */,
 				33F8A1AC2AC13741000309FB /* SnapKit in Frameworks */,
 				33F8A1AE2AC13741000309FB /* SnapKit-Dynamic in Frameworks */,
 			);
@@ -51,6 +61,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08B7D0AE2AC174210019DD9F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08B7D0AF2AC1742E0019DD9F /* APIManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		08B7D0B12AC174390019DD9F /* VCModel */ = {
+			isa = PBXGroup;
+			children = (
+				08B7D0B22AC1744F0019DD9F /* ViewControllerModel.swift */,
+			);
+			path = VCModel;
+			sourceTree = "<group>";
+		};
 		33C98C832AC12ACB00B041A0 = {
 			isa = PBXGroup;
 			children = (
@@ -72,10 +98,12 @@
 			children = (
 				33C98C8F2AC12ACB00B041A0 /* AppDelegate.swift */,
 				33C98C912AC12ACB00B041A0 /* SceneDelegate.swift */,
+				08B7D0AE2AC174210019DD9F /* Model */,
 				33F8A1B92AC13E17000309FB /* Scenes */,
 				33C98C982AC12ACC00B041A0 /* Assets.xcassets */,
 				33C98C9A2AC12ACC00B041A0 /* LaunchScreen.storyboard */,
 				33C98C9D2AC12ACC00B041A0 /* Info.plist */,
+				08B7D0B62AC199240019DD9F /* Store.swift */,
 			);
 			path = How_is_the_weather;
 			sourceTree = "<group>";
@@ -88,6 +116,7 @@
 				33F8A1C32AC15F2E000309FB /* View */,
 				33F8A1C62AC1618B000309FB /* ViewModel */,
 				33F8A1BA2AC13E22000309FB /* VC */,
+				08B7D0B12AC174390019DD9F /* VCModel */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -137,6 +166,8 @@
 			packageProductDependencies = (
 				33F8A1AB2AC13741000309FB /* SnapKit */,
 				33F8A1AD2AC13741000309FB /* SnapKit-Dynamic */,
+				08B7D0A92AC1740C0019DD9F /* SwiftyJSON */,
+				08B7D0AC2AC174140019DD9F /* Alamofire */,
 			);
 			productName = How_is_the_weather;
 			productReference = 33C98C8C2AC12ACB00B041A0 /* How_is_the_weather.app */;
@@ -168,6 +199,8 @@
 			mainGroup = 33C98C832AC12ACB00B041A0;
 			packageReferences = (
 				33F8A1AA2AC13741000309FB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				08B7D0A82AC1740C0019DD9F /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				08B7D0AB2AC174140019DD9F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 33C98C8D2AC12ACB00B041A0 /* Products */;
 			projectDirPath = "";
@@ -202,8 +235,11 @@
 				33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */,
 				33F8A1C22AC15F0A000309FB /* SearchView.swift in Sources */,
 				33F8A1B02AC13773000309FB /* TabBarView.swift in Sources */,
+				08B7D0B32AC1744F0019DD9F /* ViewControllerModel.swift in Sources */,
+				08B7D0B72AC199240019DD9F /* Store.swift in Sources */,
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
 				33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */,
+				08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +454,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		08B7D0A82AC1740C0019DD9F /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		08B7D0AB2AC174140019DD9F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
 		33F8A1AA2AC13741000309FB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -429,6 +481,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		08B7D0A92AC1740C0019DD9F /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08B7D0A82AC1740C0019DD9F /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		08B7D0AC2AC174140019DD9F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08B7D0AB2AC174140019DD9F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		33F8A1AB2AC13741000309FB /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 33F8A1AA2AC13741000309FB /* XCRemoteSwiftPackageReference "SnapKit" */;

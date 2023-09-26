@@ -1,15 +1,27 @@
 import Alamofire
 import SwiftyJSON
 
-class APIManager {
+protocol NetworkService {
+    func request(_ url: String, parameters: [String: Any], completion: @escaping (Result<Any, AFError>) -> Void)
+}
+
+struct DefaultNetworkService: NetworkService {
+    func request(_ url: String, parameters: [String: Any], completion: @escaping (Result<Any, AFError>) -> Void) {
+        AF.request(url, parameters: parameters).validate().responseJSON { response in
+            completion(response.result)
+        }
+    }
+}
+
+struct APIManager {
+    private let networkService: NetworkService
     
-    static let shared = APIManager()
-
     private let apiKey = Store().API_KEY
-
     private let baseUrl = "https://api.openweathermap.org/data/2.5/weather"
 
-    private init() {}
+    init(networkService: NetworkService = DefaultNetworkService()) {
+        self.networkService = networkService
+    }
 
     func fetchWeather(forCity city: String, completion: @escaping (Result<Weather, AFError>) -> Void) {
         let parameters: [String: Any] = [
@@ -18,8 +30,8 @@ class APIManager {
             "units": "metric"
         ]
 
-        AF.request(baseUrl, parameters: parameters).validate().responseJSON { response in
-            switch response.result {
+        networkService.request(baseUrl, parameters: parameters) { response in
+            switch response {
             case .success(let value):
                 let json = JSON(value)
                 if let weather = Weather(json: json) {
@@ -35,6 +47,7 @@ class APIManager {
 }
 
 struct Weather {
+    
     let description: String
     let temperature: Double
 
@@ -46,13 +59,14 @@ struct Weather {
         self.description = description.capitalized
         self.temperature = temperature
     }
-    
 }
 
+
+//MARK: - API 테스트 로그
 struct TestFunction {
-    
     func testAPI() {
-        APIManager.shared.fetchWeather(forCity: "Seoul") { result in
+        let apiManager = APIManager()
+        apiManager.fetchWeather(forCity: "Seoul") { result in
             switch result {
             case .success(let weather):
                 print("Successfully fetched weather for Seoul: \(weather.description), \(weather.temperature)°C")
@@ -61,5 +75,6 @@ struct TestFunction {
             }
         }
     }
-
 }
+
+

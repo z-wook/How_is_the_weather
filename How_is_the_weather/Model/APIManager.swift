@@ -2,6 +2,7 @@ import Alamofire
 import SwiftyJSON
 
 protocol NetworkService {
+    
     func request(_ url: String, parameters: [String: Any], completion: @escaping (Result<Any, AFError>) -> Void)
 }
 
@@ -78,3 +79,15 @@ struct TestFunction {
 }
 
 
+//MARK: - Unit Test
+struct MockNetworkService: NetworkService {
+    var result: Result<Any, AFError>
+    
+    init(result: Result<Any, AFError>) {
+        self.result = result
+    }
+    
+    func request(_ url: String, parameters: [String: Any], completion: @escaping (Result<Any, AFError>) -> Void) {
+        completion(result)
+    }
+}

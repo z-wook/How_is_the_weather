@@ -1,35 +1,74 @@
-//
-//  How_is_the_weatherTests.swift
-//  How_is_the_weatherTests
-//
-//  Created by ㅣ on 2023/09/26.
-//
-
 import XCTest
+import Alamofire
+@testable import How_is_the_weather
 
-final class How_is_the_weatherTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+struct MockNetworkService: NetworkService {
+    var mockData: Any?
+    var mockError: AFError?
+    
+    func request(_ url: String, parameters: [String: Any], completion: @escaping (Result<Any, AFError>) -> Void) {
+        if let data = mockData {
+            completion(.success(data))
+        } else if let error = mockError {
+            completion(.failure(error))
         }
     }
+}
 
+
+class APIManagerTests: XCTestCase {
+    
+    var apiManager: APIManager!
+    var mockService: MockNetworkService!
+    
+    override func setUp() {
+        super.setUp()
+        mockService = MockNetworkService()
+        apiManager = APIManager(networkService: mockService)
+    }
+    
+    func testFetchWeatherSuccess() {
+        // Mock a successful response
+        let mockJSON: [String: Any] = [
+            "weather": [["description": "clear sky"]],
+            "main": ["temp": 25.0]
+        ]
+        mockService.mockData = mockJSON
+        
+        let expectation = self.expectation(description: "Fetch Weather Success")
+        
+        apiManager.fetchWeather(forCity: "Seoul") { result in
+            switch result {
+            case .success(let weather):
+                XCTAssertEqual(weather.description, "Clear sky")
+                XCTAssertEqual(weather.temperature, 25.0)
+            case .failure:
+                XCTFail("Expected success, but test failed.")
+            }
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testFetchWeatherFailure() {
+        // Mock a failure response
+        let error = AFError.invalidURL(url: "invalid")
+        mockService.mockError = error
+        
+        let expectation = self.expectation(description: "Fetch Weather Failure")
+        
+        apiManager.fetchWeather(forCity: "Seoul") { result in
+            switch result {
+            case .success:
+                XCTFail("Expected failure, but test succeeded.")
+            case .failure(let receivedError):
+                XCTAssertEqual(receivedError.localizedDescription, error.localizedDescription)
+            }
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 }

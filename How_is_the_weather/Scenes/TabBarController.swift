@@ -12,7 +12,7 @@ final class TabBarController: UITabBarController {
     
     private let tabBarView = TabBarView()
     private let homeVC = HomeViewController()
-    private let globalVC = SearchViewController()
+    private let searchVC = SearchViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ private extension TabBarController {
         tabBar.isHidden = true
         navigationItem.title = "날씨어때"
         view.backgroundColor = .systemBackground
-        viewControllers = [homeVC, globalVC]
+        viewControllers = [homeVC, searchVC]
     }
     
     func setLayout() {

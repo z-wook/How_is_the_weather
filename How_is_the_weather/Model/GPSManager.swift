@@ -8,7 +8,7 @@
 import UIKit
 import CoreLocation
 
-class GPSController: UIViewController, CLLocationManagerDelegate {
+class GPSManager: UIViewController, CLLocationManagerDelegate {
     
     var locationManager = CLLocationManager()
     

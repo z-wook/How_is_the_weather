@@ -5,7 +5,7 @@ protocol ViewControllerModelDelegate: AnyObject {
     func didFailToFetchWeather(error: Error)
 }
 
-class ViewControllerModel {
+class WeatherViewModel {
     
     weak var delegate: ViewControllerModelDelegate?
     

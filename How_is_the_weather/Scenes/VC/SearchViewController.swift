@@ -8,6 +8,7 @@
 import UIKit
 
 final class SearchViewController: UIViewController {
+    
     private let searchView = SearchView()
     private let viewModel = SearchViewModel()
     
@@ -20,12 +21,22 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemCyan
         configure()
+        bind()
+        viewModel.loadWeatherList
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        viewModel.manager.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        print("deinit - GlobalVC")
+        print("deinit - SearchVC")
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,36 +46,66 @@ final class SearchViewController: UIViewController {
 
 private extension SearchViewController {
     func configure() {
+        view.backgroundColor = .systemCyan
         searchView.searchBar.delegate = self
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
+    }
+    
+    func bind() {
+        viewModel.reloadCollectionView = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.searchView.collectionView.reloadData()
+            }
+        }
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.textFieldtext = searchBar.searchTextField.text
+        viewModel.textFieldText = searchBar.searchTextField.text
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("click")
+        viewModel.getWeather
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+}
+
+extension SearchViewController: ViewControllerModelDelegate {
+    func didFetchWeather(weather: Weather) {
+        viewModel.saveWeather(weather: weather)
+    }
+    
+    func didFailToFetchWeather(error: Error) {
+        showAlert(title: "에러", message: error.localizedDescription)
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 40
+        return viewModel.weatherList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: WeatherCell.identifier,
             for: indexPath) as? WeatherCell else { return UICollectionViewCell() }
-//        cell.configure()
+        let weatherInfo = viewModel.weatherList[indexPath.item]
+        cell.configure(info: weatherInfo)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 50)
+        return CGSize(width: collectionView.bounds.width, height: 100)
     }
 }

@@ -12,8 +12,15 @@ final class WeatherCell: UICollectionViewCell {
     
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.text = "나의 위치"
         label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .label
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .regular)
         label.textColor = .label
         label.textAlignment = .left
         return label
@@ -21,15 +28,40 @@ final class WeatherCell: UICollectionViewCell {
     
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
-        label.text = "30 ℃"
         label.font = .systemFont(ofSize: 20, weight: .bold)
         label.textColor = .label
         label.textAlignment = .left
         return label
     }()
     
-    func configure() {
+    private lazy var vStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fill
         
+        [cityLabel, descriptionLabel].forEach {
+            view.addArrangedSubview($0)
+        }
+        return view
+    }()
+    
+    private lazy var hStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .equalCentering
+        
+        [vStackView, temperatureLabel].forEach {
+            view.addArrangedSubview($0)
+        }
+        return view
+    }()
+    
+    func configure(info: WeatherInfo) {
+        cityLabel.text = info.city
+        descriptionLabel.text = info.description
+        temperatureLabel.text = "\(info.temperature) ℃"
     }
     
     override init(frame: CGRect) {
@@ -44,18 +76,10 @@ final class WeatherCell: UICollectionViewCell {
 
 private extension WeatherCell {
     func setLayout() {
-        [cityLabel, temperatureLabel].forEach {
-            contentView.addSubview($0)
-        }
+        contentView.addSubview(hStackView)
         
-        cityLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(16)
-        }
-        
-        temperatureLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(-16)
+        hStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(16)
         }
     }
 }

@@ -3,7 +3,7 @@ import CoreLocation
 
 final class HomeViewController: UIViewController {
     
-    let gpsController = GPSController()
+    let gpsController = GPSManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()

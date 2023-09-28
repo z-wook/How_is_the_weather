@@ -5,10 +5,10 @@
 //  Created by Junyoung_Hong on 2023/09/27.
 //
 
-import UIKit
+import Foundation
 import CoreLocation
 
-class GPSManager: UIViewController, CLLocationManagerDelegate {
+class GPSManager: NSObject, CLLocationManagerDelegate {
     
     var locationManager = CLLocationManager()
     

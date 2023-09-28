@@ -58,10 +58,13 @@ final class WeatherCell: UICollectionViewCell {
         return view
     }()
     
-    func configure(info: WeatherInfo) {
+    func configure(info: WeatherInfo?) {
+        guard let info = info,
+              let description = info.description,
+              let temperature = info.temperature else { return }
         cityLabel.text = info.city
-        descriptionLabel.text = info.description
-        temperatureLabel.text = "\(info.temperature) ℃"
+        descriptionLabel.text = description
+        temperatureLabel.text = "\(Int(temperature)) ℃"
     }
     
     override init(frame: CGRect) {

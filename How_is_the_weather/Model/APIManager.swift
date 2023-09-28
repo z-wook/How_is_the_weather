@@ -88,6 +88,7 @@ struct Weather {
               let temperature = json["main"]["temp"].double else {
             return nil
         }
+   
         self.description = description
         self.temperature = temperature
     }

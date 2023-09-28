@@ -1,16 +1,13 @@
 
 
 
-
-import Foundation
 import CoreLocation
 
-
 protocol LocationService {
-    func fetchCurrentLocation(completion: @escaping(Result<CLLocationCoordinate2D, LocationError>) -> Void)
+    func fetchCurrentCoordinates(completion: @escaping(Result<CLLocationCoordinate2D, LocationError>) -> Void)
 }
 
+
 enum LocationError: Error {
-    case locationError
-    case permissionDenied
+    case locationUnavailable
 }

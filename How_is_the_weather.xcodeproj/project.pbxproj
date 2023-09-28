@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		083C6A502AC5984F00FCC78F /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C6A4F2AC5984F00FCC78F /* LocationServiceTests.swift */; };
-		083C6A572AC599F500FCC78F /* WeatherPersistenceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C6A562AC599F500FCC78F /* WeatherPersistenceTest.swift */; };
-		083C6A592AC59BF400FCC78F /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C6A582AC59BF400FCC78F /* Mock.swift */; };
+		083C6A5B2AC5E0A400FCC78F /* MockGPSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C6A5A2AC5E0A400FCC78F /* MockGPSManager.swift */; };
 		08B7D0AA2AC1740C0019DD9F /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0A92AC1740C0019DD9F /* SwiftyJSON */; };
 		08B7D0AD2AC174140019DD9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0AC2AC174140019DD9F /* Alamofire */; };
 		08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0AF2AC1742E0019DD9F /* APIManager.swift */; };
@@ -46,8 +45,7 @@
 /* Begin PBXFileReference section */
 		083C6A4D2AC5984F00FCC78F /* How_is_the_weather_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = How_is_the_weather_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		083C6A4F2AC5984F00FCC78F /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
-		083C6A562AC599F500FCC78F /* WeatherPersistenceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPersistenceTest.swift; sourceTree = "<group>"; };
-		083C6A582AC59BF400FCC78F /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		083C6A5A2AC5E0A400FCC78F /* MockGPSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGPSManager.swift; sourceTree = "<group>"; };
 		08B7D0AF2AC1742E0019DD9F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		08B7D0B22AC1744F0019DD9F /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		10B598262AC43D8F005FC7C8 /* GPSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSManager.swift; sourceTree = "<group>"; };
@@ -94,9 +92,7 @@
 		083C6A4E2AC5984F00FCC78F /* How_is_the_weather_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				083C6A582AC59BF400FCC78F /* Mock.swift */,
 				083C6A4F2AC5984F00FCC78F /* LocationServiceTests.swift */,
-				083C6A562AC599F500FCC78F /* WeatherPersistenceTest.swift */,
 			);
 			path = How_is_the_weather_Tests;
 			sourceTree = "<group>";
@@ -131,6 +127,7 @@
 				10B598262AC43D8F005FC7C8 /* GPSManager.swift */,
 				339BCD582AC2DCED00937520 /* UserDefaultsManager.swift */,
 				339BCD5A2AC2E66000937520 /* WeatherInfo.swift */,
+				083C6A5A2AC5E0A400FCC78F /* MockGPSManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,8 +276,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				083C6A572AC599F500FCC78F /* WeatherPersistenceTest.swift in Sources */,
-				083C6A592AC59BF400FCC78F /* Mock.swift in Sources */,
 				083C6A502AC5984F00FCC78F /* LocationServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +298,7 @@
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
 				33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */,
 				10B598272AC43D8F005FC7C8 /* GPSManager.swift in Sources */,
+				083C6A5B2AC5E0A400FCC78F /* MockGPSManager.swift in Sources */,
 				08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

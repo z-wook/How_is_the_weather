@@ -58,12 +58,10 @@ private extension SearchViewController {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.textFieldText = searchBar.searchTextField.text
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.getWeather
+        viewModel.textFieldText = searchBar.searchTextField.text
+        viewModel.searchWeather
+        searchBar.text = nil
     }
     
     func showAlert(title: String, message: String) {
@@ -78,7 +76,7 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: ViewControllerModelDelegate {
     func didFetchWeather(weather: Weather) {
-        viewModel.saveWeather(weather: weather)
+        viewModel.receiveWeather(weather: weather)
     }
     
     func didFailToFetchWeather(error: Error) {

@@ -8,7 +8,7 @@
 import Foundation
 
 final class SearchViewModel {
-    let manager = WeatherViewModel()
+    var manager = WeatherViewModel()
     private let weatherKey = "weather"
     var weatherList: [WeatherInfo?] = []
     var textFieldText: String? = ""

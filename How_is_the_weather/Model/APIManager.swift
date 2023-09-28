@@ -31,10 +31,10 @@ struct DefaultNetworkService: NetworkService {
 // MARK: - API Manager
 
 struct APIManager: WeatherService {
+
     private let networkService: NetworkService
     private let baseUrl = URL(string: "https://api.openweathermap.org/data/2.5/weather")!
     private let apiKey = Store().API_KEY
-
     init(networkService: NetworkService = DefaultNetworkService()) {
         self.networkService = networkService
     }

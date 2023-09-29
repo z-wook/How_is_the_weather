@@ -1,43 +1,29 @@
-
-
-
-
 import XCTest
+import Alamofire
+import SwiftyJSON
 @testable import How_is_the_weather
 
-class LocationServiceTests: XCTestCase {
+class WeatherAPITests: XCTestCase {
     
-    var locationService: LocationService!
+    var api: WeatherAPI!
     
     override func setUp() {
         super.setUp()
+        api = WeatherAPI()
     }
     
-    override func tearDown() {
-        locationService = nil
-        super.tearDown()
-    }
-    
-    func testFetchCurrentCoordinates() {
+    func testRealFetchWeatherForSeoul() {
+        let expectation = self.expectation(description: "Fetching weather data for Seoul")
         
-        //Given
-        let mockLocationService = MockLocationService(location: nil, error: nil)
-        locationService = mockLocationService
-        let expectation = self.expectation(description: "Fetch Current coordinates")
-        
-        
-        //When
-        locationService.fetchCurrentCoordinates { result in
-            switch result {
-            case .success(let coordinates):
-                XCTFail("Expected failure, got coordinates: \(coordinates)")
-            case .failure(_):
-                break
-            }
+        api.fetchWeather(forCity: "Seoul") { weather, error in
+            XCTAssertNotNil(weather, "Weather data for Seoul should not be nil")
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 5, handler: nil)
         
-        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
     }
 }

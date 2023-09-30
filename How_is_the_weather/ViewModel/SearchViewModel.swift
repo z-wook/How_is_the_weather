@@ -17,7 +17,7 @@ final class SearchViewModel {
 
 extension SearchViewModel {
     var loadWeatherList: Void {
-        let cityList = fetchWeather
+        let cityList = fetchCityList
         
         for city in cityList {
             weatherList.append(WeatherInfo(city: city))
@@ -46,20 +46,29 @@ extension SearchViewModel {
             let cityList = weatherList.compactMap { weather in
                 weather?.city
             }
-            saveWeather(list: cityList)
+            saveCityList(list: cityList)
         }
+    }
+    
+    func removeWeather(index: IndexPath) {
+        weatherList.remove(at: index.item)
+        reloadCollectionView?()
+        
+        var list = fetchCityList
+        list.remove(at: index.item)
+        saveCityList(list: list)
     }
 }
 
 private extension SearchViewModel {
-    func saveWeather(list: [String]) {
+    func saveCityList(list: [String]) {
         let encoder = JSONEncoder()
         if let encodedData = try? encoder.encode(list) {
             UserDefaultsManager.setValue(value: encodedData, key: weatherKey)
         }
     }
     
-    var fetchWeather: [String] {
+    var fetchCityList: [String] {
         let decoder = JSONDecoder()
         guard let data: Data = UserDefaultsManager.getValue(key: weatherKey),
               let decodedData = try? decoder.decode([String].self, from: data) else { return [] }
@@ -67,7 +76,7 @@ private extension SearchViewModel {
     }
     
     func getIndex(city: String) -> Int? {
-        return fetchWeather.firstIndex(of: city)
+        return fetchCityList.firstIndex(of: city)
     }
     
     func checkDuplication(city: String) -> Bool {

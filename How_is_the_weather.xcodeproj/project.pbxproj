@@ -12,7 +12,6 @@
 		08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0AF2AC1742E0019DD9F /* APIManager.swift */; };
 		08B7D0B32AC1744F0019DD9F /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0B22AC1744F0019DD9F /* WeatherViewModel.swift */; };
 		10B598272AC43D8F005FC7C8 /* GPSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B598262AC43D8F005FC7C8 /* GPSManager.swift */; };
-		332A0CB32AC48B6700BB9677 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A0CB22AC48B6700BB9677 /* Store.swift */; };
 		3363D90E2AC1B32F00265FBC /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363D90D2AC1B32F00265FBC /* WeatherCell.swift */; };
 		337848002AC5FF16001FCC1E /* WeatherIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337847FF2AC5FF16001FCC1E /* WeatherIcons.swift */; };
 		339BCD592AC2DCED00937520 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339BCD582AC2DCED00937520 /* UserDefaultsManager.swift */; };
@@ -29,6 +28,7 @@
 		33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B72AC13DFA000309FB /* SearchViewController.swift */; };
 		33F8A1C22AC15F0A000309FB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1C12AC15F0A000309FB /* SearchView.swift */; };
 		33F8A1C52AC16188000309FB /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1C42AC16188000309FB /* SearchViewModel.swift */; };
+		7B12D7F12AC9AEE700A863E5 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B12D7F02AC9AEE700A863E5 /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,6 @@
 		08B7D0B22AC1744F0019DD9F /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		08B7D0C52AC2B9500019DD9F /* How_is_the_weatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = How_is_the_weatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B598262AC43D8F005FC7C8 /* GPSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSManager.swift; sourceTree = "<group>"; };
-		332A0CB22AC48B6700BB9677 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		3363D90D2AC1B32F00265FBC /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		337847FF2AC5FF16001FCC1E /* WeatherIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIcons.swift; sourceTree = "<group>"; };
 		339BCD582AC2DCED00937520 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		33F8A1B72AC13DFA000309FB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		33F8A1C12AC15F0A000309FB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		33F8A1C42AC16188000309FB /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		7B12D7F02AC9AEE700A863E5 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 		08B7D0AE2AC174210019DD9F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				332A0CB22AC48B6700BB9677 /* Store.swift */,
+				7B12D7F02AC9AEE700A863E5 /* Store.swift */,
 				08B7D0AF2AC1742E0019DD9F /* APIManager.swift */,
 				337847FF2AC5FF16001FCC1E /* WeatherIcons.swift */,
 				10B598262AC43D8F005FC7C8 /* GPSManager.swift */,
@@ -272,10 +272,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				332A0CB32AC48B6700BB9677 /* Store.swift in Sources */,
 				33F8A1B22AC138BC000309FB /* TabBarController.swift in Sources */,
 				33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */,
 				3363D90E2AC1B32F00265FBC /* WeatherCell.swift in Sources */,
+				7B12D7F12AC9AEE700A863E5 /* Store.swift in Sources */,
 				33F8A1C52AC16188000309FB /* SearchViewModel.swift in Sources */,
 				33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */,
 				33F8A1C22AC15F0A000309FB /* SearchView.swift in Sources */,

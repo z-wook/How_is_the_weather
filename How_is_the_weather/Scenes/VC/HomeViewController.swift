@@ -6,16 +6,24 @@
 //
 
 import UIKit
+import SnapKit
 
 final class HomeViewController: UIViewController {
+    let weatherView = WeatherView()
     
+    override func loadView() {
+        super.loadView()
+        view = weatherView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .black
+        
     }
     
     deinit {
+
         print("deinit - HomeVC")
     }
 }

@@ -17,6 +17,8 @@
 		33F8A1B22AC138BC000309FB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B12AC138BC000309FB /* TabBarController.swift */; };
 		33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B32AC13C0C000309FB /* HomeViewController.swift */; };
 		33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B72AC13DFA000309FB /* SearchViewController.swift */; };
+		7B0B55172AC284CA00E7F242 /* Weather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B0B55162AC284CA00E7F242 /* Weather.storyboard */; };
+		7B0B551B2AC2F0CE00E7F242 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0B551A2AC2F0CE00E7F242 /* WeatherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		33F8A1B12AC138BC000309FB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		33F8A1B32AC13C0C000309FB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		33F8A1B72AC13DFA000309FB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		7B0B55162AC284CA00E7F242 /* Weather.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Weather.storyboard; sourceTree = "<group>"; };
+		7B0B551A2AC2F0CE00E7F242 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 			children = (
 				33F8A1AF2AC13773000309FB /* TabBarView.swift */,
 				33F8A1B12AC138BC000309FB /* TabBarController.swift */,
+				7B0B55162AC284CA00E7F242 /* Weather.storyboard */,
 				33F8A1BA2AC13E22000309FB /* VC */,
 			);
 			path = Scenes;
@@ -89,6 +94,7 @@
 			children = (
 				33F8A1B32AC13C0C000309FB /* HomeViewController.swift */,
 				33F8A1B72AC13DFA000309FB /* SearchViewController.swift */,
+				7B0B551A2AC2F0CE00E7F242 /* WeatherView.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -159,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33C98C9C2AC12ACC00B041A0 /* LaunchScreen.storyboard in Resources */,
+				7B0B55172AC284CA00E7F242 /* Weather.storyboard in Resources */,
 				33C98C992AC12ACC00B041A0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +183,7 @@
 				33F8A1B02AC13773000309FB /* TabBarView.swift in Sources */,
 				33C98C922AC12ACB00B041A0 /* SceneDelegate.swift in Sources */,
 				33F8A1B42AC13C0C000309FB /* HomeViewController.swift in Sources */,
+				7B0B551B2AC2F0CE00E7F242 /* WeatherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

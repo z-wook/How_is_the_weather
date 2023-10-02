@@ -90,7 +90,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: ViewControllerModelDelegate {
+extension SearchViewController: WeatherViewModelDelegate {
+    
     func didFetchWeather(weather: Weather) {
         viewModel.receiveWeather(weather: weather)
     }

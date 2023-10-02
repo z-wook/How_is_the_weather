@@ -81,16 +81,19 @@ struct APIManager: WeatherService {
 
 struct Weather {
     let name: String
+    let id: Int
     let description: String
     let temperature: Double
     
     init?(json: JSON) {
         guard let name = json["name"].string,
+              let id = json["weather"][0]["id"].int,
               let description = json["weather"][0]["description"].string,
               let temperature = json["main"]["temp"].double else {
             return nil
         }
         self.name = name
+        self.id = id
         self.description = description
         self.temperature = temperature
     }

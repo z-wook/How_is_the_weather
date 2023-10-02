@@ -8,6 +8,7 @@
 import Foundation
 
 struct WeatherInfo: Codable {
+    var id: Int? = nil
     let city: String?
     var description: String? = nil
     var temperature: Double? = nil

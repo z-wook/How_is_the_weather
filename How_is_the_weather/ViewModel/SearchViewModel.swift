@@ -32,6 +32,7 @@ extension SearchViewModel {
     
     func receiveWeather(weather: Weather) {
         if let index = getIndex(city: weather.name) {
+            weatherList[index]?.id = weather.id
             weatherList[index]?.description = weather.description
             weatherList[index]?.temperature = weather.temperature
             reloadCollectionView?()
@@ -39,7 +40,7 @@ extension SearchViewModel {
         }
         let city = weather.name
         if checkDuplication(city: city) == false {
-            let info = WeatherInfo(city: city, description: weather.description, temperature: weather.temperature)
+            let info = WeatherInfo(id: weather.id, city: city, description: weather.description, temperature: weather.temperature)
             weatherList.append(info)
             reloadCollectionView?()
             

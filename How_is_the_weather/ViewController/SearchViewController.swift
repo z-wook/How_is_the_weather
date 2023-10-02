@@ -1,7 +1,6 @@
 import UIKit
 import SnapKit
 
-
 final class SearchViewController: UIViewController {
     
     private let searchView = SearchView()
@@ -45,6 +44,7 @@ private extension SearchViewController {
         searchView.searchBar.delegate = self
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
+        searchView.collectionView.collectionViewLayout = layout()
     }
     
     func bind() {
@@ -54,6 +54,22 @@ private extension SearchViewController {
                 self.searchView.collectionView.reloadData()
             }
         }
+    }
+    
+    func layout() -> UICollectionViewCompositionalLayout {
+        var listConfiguration = UICollectionLayoutListConfiguration(appearance: .sidebar)
+        listConfiguration.showsSeparators = false
+        listConfiguration.trailingSwipeActionsConfigurationProvider = makeSwipeActions
+        return UICollectionViewCompositionalLayout.list(using: listConfiguration)
+    }
+    
+    func makeSwipeActions(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
+        guard let indexPath = indexPath else { return nil }
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
+            guard let self = self else { return }
+            viewModel.removeWeather(index: indexPath)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
@@ -74,7 +90,8 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchViewController: ViewControllerModelDelegate {
+extension SearchViewController: WeatherViewModelDelegate {
+    
     func didFetchWeather(weather: Weather) {
         viewModel.receiveWeather(weather: weather)
     }

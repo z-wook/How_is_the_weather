@@ -34,6 +34,12 @@ final class WeatherCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var weatheImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleToFill
+        return view
+    }()
+    
     private lazy var vStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -52,7 +58,7 @@ final class WeatherCell: UICollectionViewCell {
         view.alignment = .fill
         view.distribution = .equalCentering
         
-        [vStackView, temperatureLabel].forEach {
+        [vStackView, weatheImageView, temperatureLabel].forEach {
             view.addArrangedSubview($0)
         }
         return view
@@ -65,6 +71,8 @@ final class WeatherCell: UICollectionViewCell {
         cityLabel.text = info.city
         descriptionLabel.text = description
         temperatureLabel.text = "\(Int(temperature)) ℃"
+        let icon = WeatherIcons.getWeatherIcon(result: info.id)
+        weatheImageView.image = icon
     }
     
     override init(frame: CGRect) {

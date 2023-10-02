@@ -29,6 +29,7 @@
 		33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1B72AC13DFA000309FB /* SearchViewController.swift */; };
 		33F8A1C22AC15F0A000309FB /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1C12AC15F0A000309FB /* SearchView.swift */; };
 		33F8A1C52AC16188000309FB /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8A1C42AC16188000309FB /* SearchViewModel.swift */; };
+		7B1639612ACA50A40038B0B2 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1639602ACA50A40038B0B2 /* WeatherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		33F8A1B72AC13DFA000309FB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		33F8A1C12AC15F0A000309FB /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		33F8A1C42AC16188000309FB /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		7B1639602ACA50A40038B0B2 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				33F8A1B72AC13DFA000309FB /* SearchViewController.swift */,
 				3363D90D2AC1B32F00265FBC /* WeatherCell.swift */,
 				33F8A1B32AC13C0C000309FB /* HomeViewController.swift */,
+				7B1639602ACA50A40038B0B2 /* WeatherView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				33C98C902AC12ACB00B041A0 /* AppDelegate.swift in Sources */,
 				3363D90E2AC1B32F00265FBC /* WeatherCell.swift in Sources */,
 				33F8A1C52AC16188000309FB /* SearchViewModel.swift in Sources */,
+				7B1639612ACA50A40038B0B2 /* WeatherView.swift in Sources */,
 				33F8A1B82AC13DFA000309FB /* SearchViewController.swift in Sources */,
 				33F8A1C22AC15F0A000309FB /* SearchView.swift in Sources */,
 				339BCD5B2AC2E66000937520 /* WeatherInfo.swift in Sources */,

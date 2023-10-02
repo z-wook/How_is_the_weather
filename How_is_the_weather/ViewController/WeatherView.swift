@@ -1,3 +1,4 @@
+
 import UIKit
 import SnapKit
 
@@ -9,9 +10,9 @@ import SnapKit
 //    self.view.addSubview(shadows)
 
 class WeatherView : UIViewController {
+
     
     private let viewModel = WeatherViewModel()
-
     var temperature = UILabel()
     var city = UILabel()
     let sunImageView : UIImageView = {
@@ -20,8 +21,7 @@ class WeatherView : UIViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         return imageView
     }()
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -87,6 +87,3 @@ extension WeatherView: WeatherViewModelDelegate {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }
 }
-
-
-

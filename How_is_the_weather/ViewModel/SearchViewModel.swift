@@ -17,11 +17,16 @@ final class SearchViewModel {
 
 extension SearchViewModel {
     var loadWeatherList: Void {
-        let cityList = fetchCityList
+        weatherList.removeAll()
+        reloadCollectionView?()
         
-        for city in cityList {
-            weatherList.append(WeatherInfo(city: city))
-            manager.fetchWeatherForCity(city)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self = self else { return }
+            let cityList = fetchCityList
+            for city in cityList {
+                weatherList.append(WeatherInfo(city: city))
+                manager.fetchWeatherForCity(city)
+            }
         }
     }
     

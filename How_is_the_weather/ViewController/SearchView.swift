@@ -9,6 +9,15 @@ import UIKit
 import SnapKit
 
 final class SearchView: UIView {
+    lazy var reloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(
+            UIImage(systemName: "arrow.counterclockwise.circle"),
+            for: .normal)
+        button.tintColor = .darkGray
+        return button
+    }()
+    
     lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
         view.placeholder = "도시 또는 공항 검색"
@@ -26,6 +35,13 @@ final class SearchView: UIView {
         return view
     }()
     
+    lazy var indicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.color = .systemOrange
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
     init() {
         super.init(frame: .zero)
         setLayout()
@@ -38,12 +54,25 @@ final class SearchView: UIView {
 
 private extension SearchView {
     func setLayout() {
-        [searchBar, collectionView].forEach {
+        collectionView.addSubview(indicator)
+        
+        [reloadButton, searchBar, collectionView].forEach {
             self.addSubview($0)
         }
         
+        indicator.snp.makeConstraints {
+            $0.center.equalTo(collectionView)
+        }
+        
+        reloadButton.snp.makeConstraints {
+            $0.top.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            $0.width.height.equalTo(50)
+            $0.centerY.equalTo(searchBar)
+        }
+        
         searchBar.snp.makeConstraints {
-            $0.leading.top.trailing.equalTo(self.safeAreaLayoutGuide).inset(20)
+            $0.leading.top.equalTo(self.safeAreaLayoutGuide).inset(20)
+            $0.trailing.equalTo(reloadButton.snp.leading)
         }
         
         collectionView.snp.makeConstraints {

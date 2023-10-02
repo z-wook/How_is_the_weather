@@ -17,6 +17,7 @@ final class SearchViewController: UIViewController {
         
         configure()
         bind()
+        searchView.indicator.startAnimating()
         viewModel.loadWeatherList
     }
     
@@ -44,6 +45,7 @@ private extension SearchViewController {
         searchView.searchBar.delegate = self
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
+        searchView.reloadButton.addTarget(self, action: #selector(didTappedReloadBtn), for: .touchUpInside)
         searchView.collectionView.collectionViewLayout = layout()
     }
     
@@ -51,6 +53,7 @@ private extension SearchViewController {
         viewModel.reloadCollectionView = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.searchView.indicator.stopAnimating()
                 self.searchView.collectionView.reloadData()
             }
         }
@@ -87,6 +90,11 @@ extension SearchViewController: UISearchBarDelegate {
         let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
+    }
+    
+    @objc func didTappedReloadBtn() {
+        searchView.indicator.startAnimating()
+        viewModel.loadWeatherList
     }
 }
 

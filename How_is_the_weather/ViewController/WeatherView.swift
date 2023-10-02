@@ -16,7 +16,7 @@ import SnapKit
 //    shadows.clipsToBounds = false
 //    self.view.addSubview(shadows)
 
-class WeatherView : UIView {
+class WeatherView : UIViewController {
     var temperature = UILabel()
     var city = UILabel()
     let sunImageView : UIImageView = {
@@ -26,32 +26,29 @@ class WeatherView : UIView {
         return imageView
     }()
     
-    init() {
-        super.init(frame: .zero)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setlayout()
+    
         makeTemperature()
         makeCity()
-        setlayout()
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func makeTemperature() {
-        temperature.textColor = .white
+        temperature.textColor = .black
         temperature.font = .systemFont(ofSize: 110)
         temperature.text = "10"
     }
     func makeCity() {
-        city.textColor = .white
+        city.textColor = .black
         city.font = .systemFont(ofSize: 20)
         city.text = "서울특별시"
     }
     func setlayout() {
-        addSubview(temperature)
-        addSubview(city)
-        addSubview(sunImageView)
+        view.addSubview(temperature)
+        view.addSubview(city)
+        view.addSubview(sunImageView)
         
         temperature.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(130)

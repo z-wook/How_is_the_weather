@@ -11,12 +11,11 @@ import SnapKit
 final class TabBarController: UITabBarController {
     
     private let tabBarView = TabBarView()
-    private let homeVC = HomeViewController()
+    private let weatherVC = WeatherView()
     private let searchVC = SearchViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configure()
         setLayout()
         configTabBarBtn()
@@ -28,7 +27,7 @@ private extension TabBarController {
         tabBar.isHidden = true
         navigationItem.title = "날씨어때"
         view.backgroundColor = .systemBackground
-        viewControllers = [homeVC, searchVC]
+        viewControllers = [weatherVC, searchVC]
     }
     
     func setLayout() {

@@ -75,6 +75,8 @@ struct APIManager: WeatherService {
             }
         }
     }
+    
+    
 }
 
 // MARK: - Models

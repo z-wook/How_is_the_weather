@@ -10,7 +10,14 @@ import SnapKit
 //    self.view.addSubview(shadows)
 
 class WeatherView : UIViewController {
-
+    
+    let clothesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
+    }()
     
     private let viewModel = WeatherViewModel()
     var temperature = UILabel()
@@ -21,7 +28,15 @@ class WeatherView : UIViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         return imageView
     }()
-        
+    //MARK - Clothes 이미지뷰
+    
+    lazy var clothesView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "clothesView")
+        imageView.frame = CGRect(x: 0, y: 0, width: 350, height: 250)
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -46,6 +61,9 @@ class WeatherView : UIViewController {
         view.addSubview(temperature)
         view.addSubview(city)
         view.addSubview(sunImageView)
+        view.addSubview(clothesView)
+        
+        view.addSubview(clothesStackView)
         
         temperature.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(130)
@@ -59,28 +77,40 @@ class WeatherView : UIViewController {
             make.centerY.equalTo(temperature.snp.centerY)
             make.left.equalTo(temperature.snp.right).offset(20)
         }
+        clothesView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-200)
+            make.height.equalTo(100)
+        }
+        
+       
+        clothesStackView.snp.makeConstraints {
+            $0.left.equalTo(clothesView.snp.left).offset(30)
+            $0.top.equalTo(clothesView.snp.top).offset(10)
+        }
     }
 }
 
 
 
 //MARK: - WeatherViewModelDelegate
-
 extension WeatherView: WeatherViewModelDelegate {
-    
     func didFetchWeather(weather: Weather) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
-                print(weatherID)
                 let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
                 bgColor.frame = self.view.bounds
                 self.view.layer.insertSublayer(bgColor, at: 0)
+                
+                let clothesImage = WeatherClothes(weatherID: weatherID)
+                for image in clothesImage.images {
+                    let imageView = UIImageView(image: image)
+                    imageView.contentMode = .scaleAspectFit
+                    self.clothesStackView.addArrangedSubview(imageView)
+                }
             }
-            //self.temperature.text = self.viewModel.temperatureText
-            //self.city.text = self.viewModel.cityName
         }
-        
     }
     
     func didFailToFetchWeather(error: Error) {

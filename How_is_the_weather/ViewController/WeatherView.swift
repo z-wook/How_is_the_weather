@@ -77,10 +77,11 @@ class WeatherView : UIViewController {
     }
     
     func makeTemperature() {
-        temperature.setTitle("10", for: .normal)
+        temperature.setTitle("10 °C", for: .normal)
         temperature.titleLabel?.font = .systemFont(ofSize: 100)
         temperature.backgroundColor = .none
         temperature.frame = CGRect(x: 400, y: 400, width: 300, height: 300)
+        temperature.addTarget(self, action: #selector(changeUnit), for: .touchUpInside)
     }
     func makeCity() {
         city.textColor = .black
@@ -94,7 +95,7 @@ class WeatherView : UIViewController {
         
         temperature.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(130)
-            make.left.equalToSuperview().offset(100)
+            make.centerX.equalToSuperview()
         }
         city.snp.makeConstraints { make in
             make.top.equalTo(temperature.snp.bottom)
@@ -107,12 +108,9 @@ class WeatherView : UIViewController {
     }
 }
 
-
-
 //MARK: - WeatherViewModelDelegate
 
 extension WeatherView: WeatherViewModelDelegate {
-    
     func didFetchWeather(weather: Weather) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -122,13 +120,16 @@ extension WeatherView: WeatherViewModelDelegate {
                 bgColor.frame = self.view.bounds
                 self.view.layer.insertSublayer(bgColor, at: 0)
             }
-            //self.temperature.text = self.viewModel.temperatureText
-            //self.city.text = self.viewModel.cityName
+            temperature.setTitle(viewModel.temperatureText, for: .normal)
         }
-        
     }
     
     func didFailToFetchWeather(error: Error) {
         print("Failed to fetch weather: \(error.localizedDescription)")
+    }
+    
+    @objc private func changeUnit(_ sender: UIButton) {
+        viewModel.type = viewModel.type == .celsius ? .fahrenheit : .celsius
+        sender.setTitle(viewModel.changeUnit, for: .normal)
     }
 }

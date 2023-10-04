@@ -13,7 +13,7 @@ struct BackgroundColor {
     private static let clearColor = UIColor.yellow
     private static let cloudsColor = UIColor.gray
     
-    private var startColor: UIColor
+    private(set) var startColor: UIColor
     
     var gradientLayer: CAGradientLayer {
         let gradient = CAGradientLayer()

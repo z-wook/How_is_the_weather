@@ -15,6 +15,15 @@ class WeatherView : UIViewController {
     private let viewModel = WeatherViewModel()
     var temperature = UILabel()
     var city = UILabel()
+    
+    let clothesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "sun")
@@ -65,24 +74,27 @@ class WeatherView : UIViewController {
 
 
 //MARK: - WeatherViewModelDelegate
-
 extension WeatherView: WeatherViewModelDelegate {
-    
     func didFetchWeather(weather: Weather) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
                 print(weatherID)
-                let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
-                bgColor.frame = self.view.bounds
-                self.view.layer.insertSublayer(bgColor, at: 0)
+                let bgColor = BackgroundColor(weatherID: weatherID)
+                let gradientView = AnimatedGradientView(frame: self.view.bounds)
+                gradientView.setGradient(startColor: bgColor.startColor, endColor: UIColor.white)
+                self.view.insertSubview(gradientView, at: 0)
+
+                let clothesImage = ClothesImage(weatherID: weatherID)
+                for image in clothesImage.images {
+                    let imageView = UIImageView(image: image)
+                    imageView.contentMode = .scaleAspectFit
+                    self.clothesStackView.addArrangedSubview(imageView)
+                }
             }
-            //self.temperature.text = self.viewModel.temperatureText
-            //self.city.text = self.viewModel.cityName
         }
-        
     }
-    
+
     func didFailToFetchWeather(error: Error) {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }

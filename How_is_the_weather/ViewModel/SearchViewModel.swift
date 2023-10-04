@@ -2,10 +2,12 @@
 import Foundation
 
 final class SearchViewModel {
-    let manager = WeatherViewModel()
+    let weatherManager = WeatherViewModel()
+    let temperatureManager = TemperatureManager()
     private let weatherKey = "weather"
     var weatherList: [WeatherInfo?] = []
     var textFieldText: String? = ""
+    var type: TemperatureType = .celsius
     var reloadCollectionView: (() -> Void)?
 }
 
@@ -19,14 +21,14 @@ extension SearchViewModel {
             let cityList = fetchCityList
             for city in cityList {
                 weatherList.append(WeatherInfo(city: city))
-                manager.fetchWeatherForCity(city)
+                weatherManager.fetchWeatherForCity(city)
             }
         }
     }
     
     var searchWeather: Void {
         guard let text = textFieldText else { return }
-        manager.fetchWeatherForCity(text)
+        weatherManager.fetchWeatherForCity(text)
     }
     
     func receiveWeather(weather: Weather) {
@@ -58,6 +60,26 @@ extension SearchViewModel {
         list.remove(at: index.item)
         saveCityList(list: list)
     }
+    
+    var changeUnit: Void {
+        switch type {
+        case .celsius:
+            let updateList = weatherList.map { info in
+                var updatedInfo = info
+                updatedInfo?.temperature = temperatureManager.fahrenheitToCelsius(fahrenheit: info?.temperature)
+                return updatedInfo
+            }
+            weatherList = updateList
+        case .fahrenheit:
+            let updateList = weatherList.map { info in
+                var updatedInfo = info
+                updatedInfo?.temperature = temperatureManager.celsiusToFahrenheit(celsius: info?.temperature)
+                return updatedInfo
+            }
+            weatherList = updateList
+        }
+        reloadCollectionView?()
+    }
 }
 
 private extension SearchViewModel {
@@ -84,5 +106,17 @@ private extension SearchViewModel {
             $0?.city == city
         }
     }
+    
+//    func celsiusToFahrenheit(celsius: Double?) -> Double {
+//        guard let celsius = celsius else { return 0 }
+//        let fahrenheit = (celsius * 9/5) + 32
+//        return fahrenheit
+//    }
+//    
+//    func fahrenheitToCelsius(fahrenheit: Double?) -> Double {
+//        guard let fahrenheit = fahrenheit else { return 0 }
+//        let celsius = (fahrenheit - 32) * 5/9
+//        return celsius
+//    }
 }
 

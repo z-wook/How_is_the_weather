@@ -20,10 +20,12 @@ final class SearchView: UIView {
     
     lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
-        view.placeholder = "도시 또는 공항 검색"
-        view.layer.cornerRadius = 10
-        view.backgroundColor = .systemCyan
-        view.layer.masksToBounds = true
+        view.placeholder = "도시 검색"
+        view.backgroundColor = .clear
+        view.backgroundImage = UIImage()
+        view.searchTextField.layer.cornerRadius = 10
+        view.searchTextField.layer.borderWidth = 2
+        view.searchTextField.layer.borderColor = UIColor.lightGray.cgColor
         return view
     }()
     

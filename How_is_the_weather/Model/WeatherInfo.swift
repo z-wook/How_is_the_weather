@@ -13,6 +13,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct WeatherInfo: Codable {
     var id: Int? = nil
@@ -52,5 +53,25 @@ enum WeatherType {
             return nil
         }
     }
+    
+    var getIcon: UIImage? {
+        switch self {
+        case .thunderstorm:
+            return UIImage(named: "bolt")
+        case .drizzle:
+            return UIImage(named: "rain")
+        case .rain:
+            return UIImage(named: "rain")
+        case .snow:
+            return UIImage(named: "snow")
+        case .atmosphere:
+            return UIImage(named: "smoke")
+        case .tornado:
+            return UIImage(named: "tornado")
+        case .clear:
+            return UIImage(named: "sun")
+        case .clouds:
+            return UIImage(named: "cloud")
+        }
+    }
 }
-

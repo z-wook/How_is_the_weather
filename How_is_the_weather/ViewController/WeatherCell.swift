@@ -34,6 +34,12 @@ final class WeatherCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var weatheImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleToFill
+        return view
+    }()
+    
     private lazy var vStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -52,19 +58,30 @@ final class WeatherCell: UICollectionViewCell {
         view.alignment = .fill
         view.distribution = .equalCentering
         
-        [vStackView, temperatureLabel].forEach {
+        [vStackView, weatheImageView, temperatureLabel].forEach {
             view.addArrangedSubview($0)
+        }
+        weatheImageView.snp.makeConstraints {
+            $0.trailing.equalTo(temperatureLabel.snp.leading).offset(-10)
         }
         return view
     }()
     
-    func configure(info: WeatherInfo?) {
+    func configure(type: TemperatureType, info: WeatherInfo?) {
         guard let info = info,
+              let id = info.id,
               let description = info.description,
               let temperature = info.temperature else { return }
         cityLabel.text = info.city
         descriptionLabel.text = description
-        temperatureLabel.text = "\(Int(temperature)) ℃"
+        switch type {
+        case .celsius:
+            temperatureLabel.text = "\(Int(round(temperature))) °C"
+        case .fahrenheit:
+            temperatureLabel.text = "\(Int(round(temperature))) °F"
+        }
+        let image = WeatherType(weatherID: id)?.getIcon
+        weatheImageView.image = image
     }
     
     override init(frame: CGRect) {

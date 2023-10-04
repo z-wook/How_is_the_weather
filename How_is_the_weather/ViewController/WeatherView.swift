@@ -1,8 +1,3 @@
-//
-//  WeatherView.swift
-//  How_is_the_weather
-//
-//  Created by t2023-m0095 on 2023/09/26.
 
 import UIKit
 import SnapKit
@@ -15,7 +10,11 @@ import SnapKit
 //    self.view.addSubview(shadows)
 
 class WeatherView : UIViewController {
+
     var temperature = UIButton(type: .system)
+    
+    private let viewModel = WeatherViewModel()
+
     var city = UILabel()
     let thunderstormImageView : UIImageView = {
         let imageView = UIImageView()
@@ -59,6 +58,7 @@ class WeatherView : UIViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         return imageView
     }()
+
     let cloudsImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "clouds")
@@ -68,8 +68,10 @@ class WeatherView : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
+        viewModel.fetchWeatherForCity("Seoul")
+        
         setlayout()
-    
         makeTemperature()
         makeCity()
     }
@@ -107,3 +109,26 @@ class WeatherView : UIViewController {
 
 
 
+//MARK: - WeatherViewModelDelegate
+
+extension WeatherView: WeatherViewModelDelegate {
+    
+    func didFetchWeather(weather: Weather) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let weatherID = self.viewModel.weatherID {
+                print(weatherID)
+                let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
+                bgColor.frame = self.view.bounds
+                self.view.layer.insertSublayer(bgColor, at: 0)
+            }
+            //self.temperature.text = self.viewModel.temperatureText
+            //self.city.text = self.viewModel.cityName
+        }
+        
+    }
+    
+    func didFailToFetchWeather(error: Error) {
+        print("Failed to fetch weather: \(error.localizedDescription)")
+    }
+}

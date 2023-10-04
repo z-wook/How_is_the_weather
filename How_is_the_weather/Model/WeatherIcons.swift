@@ -7,41 +7,23 @@
 
 import UIKit
 
-enum WeatherIcons: String {
-    case clear_sky
-    case few_clouds
-    case scattered_clouds
-    case broken_clouds
-    case shower_rain
-    case rain
-    case thunderstorm
-    case snow
-    case mist
-    
-    var title: String {
-        return rawValue
+struct WeatherIcons {
+    static func getWeatherIcon(result: Int?) -> UIImage? {
+        guard let result = result else { return nil }
+        if 200...232 ~= result { // Thunderstorm
+            return UIImage(named: "bolt")
+        } else if 300...321 ~= result || 500...531 ~= result { // Drizzle, Rain
+            return UIImage(named: "rain")
+        } else if 600...622 ~= result { // Snow
+            return UIImage(named: "snow")
+        } else if 701...771 ~= result { // Mist, Smoke, Haze, Dust, Fog, Sand, Ash, Squall
+            return UIImage(named: "smoke")
+        } else if 781 == result { // Tornado
+            return UIImage(named: "tornado")
+        } else if 800 == result { // Clear
+            return UIImage(named: "sun")
+        } else { // Clouds
+            return UIImage(named: "cloud")
+        }
     }
-    
-//    var image: UIImage? {
-//        switch self {
-//        case .clear_sky:
-//            return UIImage(named: <#T##String#>)
-//        case .few_clouds:
-//            return UIImage(named: <#T##String#>)
-//        case .scattered_clouds:
-//            return UIImage(named: <#T##String#>)
-//        case .broken_clouds:
-//            return UIImage(named: <#T##String#>)
-//        case .shower_rain:
-//            return UIImage(named: <#T##String#>)
-//        case .rain:
-//            return UIImage(named: <#T##String#>)
-//        case .thunderstorm:
-//            return UIImage(named: <#T##String#>)
-//        case .snow:
-//            return UIImage(named: <#T##String#>)
-//        case .mist:
-//            return UIImage(named: <#T##String#>)
-//        }
-//    }
 }

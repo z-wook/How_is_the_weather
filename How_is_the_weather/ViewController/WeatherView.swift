@@ -164,6 +164,7 @@ extension WeatherView: WeatherViewModelDelegate {
             self.temperature.setTitle(self.viewModel.temperatureText, for: .normal)
             self.temperature.titleLabel?.font = UIFont.systemFont(ofSize: 80)
             self.city.text = self.viewModel.cityName
+            sunImageView.image = WeatherType(weatherID: weather.id)?.getIcon
         }
     }
     

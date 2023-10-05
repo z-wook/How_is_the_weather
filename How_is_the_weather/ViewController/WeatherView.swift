@@ -66,7 +66,8 @@ class WeatherView : UIViewController {
     }
     
     func makeTemperature() {
-        temperature.setTitle("10 °C", for: .normal)
+        let text = NSMutableAttributedString.customTemperatureText(inputText: "10 °C")
+        temperature.setAttributedTitle(text, for: .normal)
         temperature.titleLabel?.font = .systemFont(ofSize: 100)
         temperature.setTitleColor(UIColor.white, for: .normal)
         temperature.backgroundColor = .none
@@ -76,7 +77,8 @@ class WeatherView : UIViewController {
     
     @objc private func changeUnit(_ sender: UIButton) {
         viewModel.type = viewModel.type == .celsius ? .fahrenheit : .celsius
-        sender.setTitle(viewModel.changeUnit, for: .normal)
+        let text = NSMutableAttributedString.customTemperatureText(inputText: viewModel.changeUnit)
+        sender.setAttributedTitle(text, for: .normal)
     }
     
     func makeLocationButton() {
@@ -160,8 +162,8 @@ extension WeatherView: WeatherViewModelDelegate {
                     self.clothesStackView.addArrangedSubview(imageView)
                 }
             }
-            self.temperature.setTitle(self.viewModel.temperatureText, for: .normal)
-            self.temperature.titleLabel?.font = UIFont.systemFont(ofSize: 80)
+            let text = NSMutableAttributedString.customTemperatureText(inputText: viewModel.temperatureText)
+            self.temperature.setAttributedTitle(text, for: .normal)
             self.city.text = self.viewModel.cityName
             sunImageView.image = WeatherType(weatherID: weather.id)?.getIcon
         } 

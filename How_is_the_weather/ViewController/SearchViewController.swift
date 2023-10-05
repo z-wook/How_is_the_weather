@@ -5,16 +5,21 @@ final class SearchViewController: UIViewController {
     
     private let searchView = SearchView()
     private let viewModel = SearchViewModel()
-    
     override func loadView() {
         super.loadView()
         
         view = searchView
     }
     
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configure()
         bind()
         viewModel.loadWeatherList
@@ -22,7 +27,9 @@ final class SearchViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        viewModel.weatherManager.delegate = self
+
+        viewModel.manager.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +47,6 @@ final class SearchViewController: UIViewController {
 
 private extension SearchViewController {
     func configure() {
-        view.backgroundColor = .systemCyan
         searchView.searchBar.delegate = self
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self

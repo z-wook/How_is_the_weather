@@ -9,13 +9,15 @@ import UIKit
 import SnapKit
 
 final class TabBarController: UITabBarController {
-    
+    private let viewModel = WeatherViewModel()
     private let tabBarView = TabBarView()
     private let weatherVC = WeatherView()
     private let searchVC = SearchViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
+        viewModel.fetchWeatherForCity("Seoul")
         configure()
         setLayout()
         configTabBarBtn()
@@ -26,7 +28,6 @@ private extension TabBarController {
     func configure() {
         tabBar.isHidden = true
         navigationItem.title = "날씨어때"
-        view.backgroundColor = .systemBackground
         viewControllers = [weatherVC, searchVC]
     }
     
@@ -63,3 +64,27 @@ private extension TabBarController {
         changeTintColor(buttonType: tabBarView.globalBtn)
     }
 }
+
+
+extension TabBarController {
+    func setBackground(forWeatherID weatherID: Int) {
+        let bgColor = BackgroundColor(weatherID: weatherID)
+        let gradientView = AnimatedGradientView(frame: self.view.bounds)
+        gradientView.setGradient(startColor: bgColor.startColor, endColor: UIColor.white)
+        self.view.insertSubview(gradientView, at: 0)
+    }
+
+}
+
+extension TabBarController: WeatherViewModelDelegate {
+    func didFetchWeather(weather: Weather) {
+        if let weatherID = viewModel.weatherID {
+            setBackground(forWeatherID: weatherID)
+        }
+    }
+
+    func didFailToFetchWeather(error: Error) {
+        print("Failed to fetch weather: \(error.localizedDescription)")
+    }
+}
+

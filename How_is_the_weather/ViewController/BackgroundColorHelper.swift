@@ -24,8 +24,8 @@ public class AnimatedGradientView: UIView {
     
     private func setupGradientLayer() {
         gradientLayer = CAGradientLayer()
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.20)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.75)
+        gradientLayer.startPoint = CGPoint(x: 0.55, y: 0.25)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         layer.addSublayer(gradientLayer)
     }
     
@@ -43,14 +43,15 @@ public class AnimatedGradientView: UIView {
     
     private func startGradientAnimation() {
         let locationsAnimation = CABasicAnimation(keyPath: "locations")
-        locationsAnimation.duration = 5.0
-        locationsAnimation.fromValue = [0, 0.45]
-        locationsAnimation.toValue = [0.55, 1]
+        locationsAnimation.duration = 8.0
+        locationsAnimation.fromValue = [0.0, 0.5]
+        locationsAnimation.toValue = [0.5, 1.0]
         locationsAnimation.autoreverses = true
         locationsAnimation.repeatCount = Float.infinity
         gradientLayer.add(locationsAnimation, forKey: "locationsChange")
     }
-
+    
+    
     override public func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = bounds
@@ -60,7 +61,7 @@ public class AnimatedGradientView: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if let startColor = dynamicStartColor,
-            let endColor = dynamicEndColor {
+           let endColor = dynamicEndColor {
             gradientLayer.colors = [startColor.resolvedColor(with: self.traitCollection).cgColor,
                                     endColor.resolvedColor(with: self.traitCollection).cgColor]
         }
@@ -70,31 +71,23 @@ public class AnimatedGradientView: UIView {
 
 public extension UIColor {
     
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
-
-    convenience init(rgb: Int) {
-        self.init(
-            red: (rgb >> 16) & 0xFF,
-            green: (rgb >> 8) & 0xFF,
-            blue: rgb & 0xFF
-        )
-    }
-    
-    static func dynamic(light: UIColor, dark: UIColor) -> UIColor {
-        return UIColor { traitCollection in
-            switch traitCollection.userInterfaceStyle {
-            case .dark:
-                return dark
-            default:
-                return light
-            }
+    convenience init(hex: String) {
+        let hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        let scanner = Scanner(string: hexSanitized)
+        
+        if hexSanitized.hasPrefix("#") {
+            scanner.currentIndex = scanner.string.index(after: scanner.currentIndex)
+        }
+        
+        var hexNumber: UInt64 = 0
+        
+        if scanner.scanHexInt64(&hexNumber) {
+            let red = CGFloat((hexNumber & 0xFF0000) >> 16) / 255
+            let green = CGFloat((hexNumber & 0x00FF00) >> 8) / 255
+            let blue = CGFloat(hexNumber & 0x0000FF) / 255
+            self.init(red: red, green: green, blue: blue, alpha: 1.0)
+        } else {
+            self.init(red: 0, green: 0, blue: 0, alpha: 1)
         }
     }
 }
-

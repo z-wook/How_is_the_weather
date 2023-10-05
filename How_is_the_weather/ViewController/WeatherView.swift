@@ -19,42 +19,18 @@ class WeatherView : UIViewController {
     private let viewModel = WeatherViewModel()
 
     var city = UILabel()
-    let thunderstormImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "thunderstorm")
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-        return imageView
+
+
+    
+    let clothesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
     }()
-    let drizzleImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "drizzle")
-        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return imageView
-    }()
-    let rainImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "rain")
-        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return imageView
-    }()
-    let snowImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "snow")
-        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return imageView
-    }()
-    let atmosphereImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "atmosphere")
-        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return imageView
-    }()
-    let tornadoImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "tornado")
-        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return imageView
-    }()
+    
+
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "sun")
@@ -69,11 +45,11 @@ class WeatherView : UIViewController {
         return imageView
     }()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         viewModel.fetchWeatherForCity("Seoul")
-        
         setlayout()
         makeTemperature()
         makeCity()
@@ -131,27 +107,31 @@ class WeatherView : UIViewController {
 }
 
 //MARK: - WeatherViewModelDelegate
-
 extension WeatherView: WeatherViewModelDelegate {
     func didFetchWeather(weather: Weather) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
-                print(weatherID)
-                let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
-                bgColor.frame = self.view.bounds
-                self.view.layer.insertSublayer(bgColor, at: 0)
+
+                let clothesImage = ClothesImage(weatherID: weatherID)
+                for image in clothesImage.images {
+                    let imageView = UIImageView(image: image)
+                    imageView.contentMode = .scaleAspectFit
+                    self.clothesStackView.addArrangedSubview(imageView)
+                }
             }
-//            self.temperature.titleLabel?.text = self.viewModel.temperatureText
+        self.temperature.titleLabel?.text = self.viewModel.temperatureText
             self.temperature.titleLabel?.font = UIFont.systemFont(ofSize: 80)
             self.city.text = self.viewModel.cityName
             temperature.setTitle(viewModel.temperatureText, for: .normal)
+
         }
     }
-    
+
     func didFailToFetchWeather(error: Error) {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }
+
     
     @objc private func changeUnit(_ sender: UIButton) {
         viewModel.type = viewModel.type == .celsius ? .fahrenheit : .celsius

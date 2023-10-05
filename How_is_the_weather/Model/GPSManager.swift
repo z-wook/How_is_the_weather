@@ -8,9 +8,15 @@
 import Foundation
 import CoreLocation
 
+protocol GPSManagerDelegate: AnyObject {
+    func didGetGPS(latitude: Double, longitude: Double)
+}
+
 class GPSManager: NSObject, CLLocationManagerDelegate {
     
     var locationManager = CLLocationManager()
+    var lat: CLLocationDegrees = .zero
+    var lon: CLLocationDegrees = .zero
     
     // GPS setting
     func setLocationManager() {
@@ -28,8 +34,8 @@ class GPSManager: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
+            lat = location.coordinate.latitude
+            lon = location.coordinate.longitude
             print(lat)
             print(lon)
         }

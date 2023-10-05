@@ -42,4 +42,18 @@ class WeatherViewModel {
             }
         }
     }
+    
+    func fetchWeatherForLocation(_ latitude: Double, _ longitude: Double) {
+        apiManager.fetchWeather(forLatitude: latitude, longitude: longitude) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case.success(let weather):
+                self.weatherData = weather
+                self.delegate?.didFetchWeather(weather: weather)
+            case.failure(let error):
+                self.delegate?.didFailToFetchWeather(error: error)
+            }
+        }
+    }
 }

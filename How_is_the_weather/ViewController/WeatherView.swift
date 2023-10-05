@@ -13,6 +13,9 @@ import CoreLocation
 class WeatherView : UIViewController {
 
     let gpsController = GPSManager()
+    let apiManager = APIManager()
+    let temperatureManager = TemperatureManager()
+    
     var temperature = UIButton(type: .system)
     var locationButton = UIButton()
     
@@ -72,7 +75,7 @@ class WeatherView : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        viewModel.fetchWeatherForCity("Seoul")
+        viewModel.fetchWeatherForCity("london")
         
         setlayout()
         makeTemperature()
@@ -81,21 +84,32 @@ class WeatherView : UIViewController {
         gpsController.setLocationManager()
     }
     
-    
     func makeTemperature() {
 //        temperature.setTitle("10", for: .normal)
         temperature.titleLabel?.font = .systemFont(ofSize: 100)
         temperature.setTitleColor(UIColor.white, for: .normal)
         temperature.backgroundColor = .none
     }
+    
     func makeLocationButton() {
         locationButton.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
         locationButton.tintColor = UIColor.black
-        locationButton.addTarget(self, action: #selector(RefreshLocation), for: .touchUpInside)
+        locationButton.addTarget(self, action: #selector(refreshLocation), for: .touchUpInside)
     }
-    @objc func RefreshLocation(){
+    @objc func refreshLocation(){
         
-        gpsController.setLocationManager()
+        didGetGPS(latitude: gpsController.lat, longitude: gpsController.lon)
+//        gpsController.setLocationManager()
+//        viewModel.fetchWeatherForLocation(gpsController.lat, gpsController.lon)
+//        apiManager.fetchWeather(forLatitude: gpsController.lat, longitude: gpsController.lon) { result in
+//            switch result {
+//            case.success(let weather):
+//                self.temperature.setTitle(String(weather.temperature), for: .normal)
+//                self.city.text = String(weather.name)
+//            case.failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
     func makeCity() {
@@ -138,11 +152,15 @@ extension WeatherView: WeatherViewModelDelegate {
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
                 print(weatherID)
+                
+                if let weatherIcon = WeatherIcons.getWeatherIcon(result: weatherID) {
+                    self.sunImageView.image = weatherIcon
+                }
                 let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
                 bgColor.frame = self.view.bounds
                 self.view.layer.insertSublayer(bgColor, at: 0)
             }
-//            self.temperature.titleLabel?.text = self.viewModel.temperatureText
+
             self.temperature.setTitle(self.viewModel.temperatureText, for: .normal)
             self.temperature.titleLabel?.font = UIFont.systemFont(ofSize: 80)
             self.city.text = self.viewModel.cityName
@@ -154,4 +172,10 @@ extension WeatherView: WeatherViewModelDelegate {
     }
 }
 
+extension WeatherView: GPSManagerDelegate {
+    func didGetGPS(latitude: Double, longitude: Double) {
+        gpsController.setLocationManager()
+        viewModel.fetchWeatherForLocation(latitude, longitude)
+    }
+}
 

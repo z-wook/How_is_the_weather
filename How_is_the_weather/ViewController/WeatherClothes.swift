@@ -31,7 +31,7 @@ class WeatherClothes {
         case .some(.atmosphere):
             return []
         case .some(.tornado):
-            return loadImages(named: ["anorak", "jacket", "windbreaker", "hoody", "long-sleeves", "skinny", "denim"])
+            return loadImages(named: ["jacket", "windbreaker", "hoody", "long-sleeves", "skinny", "denim"])
         case .some(.clear):
             return loadImages(named: ["t-shirt", "long-sleeves", "denim", "pants"])
         case .some(.clouds):

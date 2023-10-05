@@ -27,6 +27,7 @@ final class SearchViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
+
         viewModel.manager.delegate = self
         
     }
@@ -49,6 +50,8 @@ private extension SearchViewController {
         searchView.searchBar.delegate = self
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
+        searchView.changeUnitBtn.addTarget(self, action: #selector(changeUnit), for: .touchUpInside)
+        searchView.refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         searchView.collectionView.collectionViewLayout = layout()
     }
     
@@ -56,6 +59,7 @@ private extension SearchViewController {
         viewModel.reloadCollectionView = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
+                self.searchView.refreshControl.endRefreshing()
                 self.searchView.collectionView.reloadData()
             }
         }
@@ -76,14 +80,6 @@ private extension SearchViewController {
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-}
-
-extension SearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.textFieldText = searchBar.searchTextField.text
-        viewModel.searchWeather
-        searchBar.text = nil
-    }
     
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title,
@@ -92,6 +88,25 @@ extension SearchViewController: UISearchBarDelegate {
         let okAction = UIAlertAction(title: "확인", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
+    }
+    
+    @objc func changeUnit() {
+        viewModel.type = viewModel.type == .celsius ? .fahrenheit : .celsius
+        viewModel.changeUnit
+    }
+    
+    @objc func refresh() {
+        searchView.refreshControl.beginRefreshing()
+        viewModel.type = .celsius
+        viewModel.loadWeatherList
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.textFieldText = searchBar.searchTextField.text
+        viewModel.searchWeather
+        searchBar.text = nil
     }
 }
 
@@ -115,7 +130,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
             withReuseIdentifier: WeatherCell.identifier,
             for: indexPath) as? WeatherCell else { return UICollectionViewCell() }
         let weatherInfo = viewModel.weatherList[indexPath.item]
-        cell.configure(info: weatherInfo)
+        cell.configure(type: viewModel.type, info: weatherInfo)
         return cell
     }
     

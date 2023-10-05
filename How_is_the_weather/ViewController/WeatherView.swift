@@ -30,12 +30,15 @@ class WeatherView : UIViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         return imageView
     }()
-        
+    
+    deinit {
+        print("WeatherView deinitialize!!!")
+    }
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
         viewModel.fetchWeatherForCity("Seoul")
-        
         setlayout()
         makeTemperature()
         makeCity()
@@ -79,11 +82,14 @@ extension WeatherView: WeatherViewModelDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
-                print(weatherID)
-                let bgColor = BackgroundColor(weatherID: weatherID)
-                let gradientView = AnimatedGradientView(frame: self.view.bounds)
-                gradientView.setGradient(startColor: bgColor.startColor, endColor: UIColor.white)
-                self.view.insertSubview(gradientView, at: 0)
+//                print(weatherID)
+//                let bgColor = BackgroundColor(weatherID: weatherID)
+//                
+//                print(bgColor)
+//                let gradientView = AnimatedGradientView(frame: self.view.bounds)
+//                gradientView.setGradient(startColor: bgColor.startColor, endColor: UIColor.white)
+//                self.view.insertSubview(gradientView, at: 0)
+//                print("배경화면 에러?")
 
                 let clothesImage = ClothesImage(weatherID: weatherID)
                 for image in clothesImage.images {
@@ -99,3 +105,5 @@ extension WeatherView: WeatherViewModelDelegate {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }
 }
+
+//GradientView 밖으로 빼기

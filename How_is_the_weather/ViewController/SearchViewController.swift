@@ -4,29 +4,31 @@ import SnapKit
 final class SearchViewController: UIViewController {
     
     private let searchView = SearchView()
-    private let searchViewModel = SearchViewModel()
-    private let weatherViewModel = WeatherViewModel()
+    private let viewModel = SearchViewModel()
     override func loadView() {
         super.loadView()
         
         view = searchView
     }
     
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configure()
         bind()
-        searchViewModel.loadWeatherList
-
-        weatherViewModel.fetchWeatherForCity("Seoul")
-
+        viewModel.loadWeatherList
     }
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        searchViewModel.manager.delegate = self
-
+        viewModel.manager.delegate = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -44,7 +46,6 @@ final class SearchViewController: UIViewController {
 
 private extension SearchViewController {
     func configure() {
-        weatherViewModel.delegate = self
         searchView.searchBar.delegate = self
         searchView.collectionView.delegate = self
         searchView.collectionView.dataSource = self
@@ -52,7 +53,7 @@ private extension SearchViewController {
     }
     
     func bind() {
-        searchViewModel.reloadCollectionView = { [weak self] in
+        viewModel.reloadCollectionView = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.searchView.collectionView.reloadData()
@@ -71,7 +72,7 @@ private extension SearchViewController {
         guard let indexPath = indexPath else { return nil }
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
             guard let self = self else { return }
-            searchViewModel.removeWeather(index: indexPath)
+            viewModel.removeWeather(index: indexPath)
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
@@ -79,8 +80,8 @@ private extension SearchViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchViewModel.textFieldText = searchBar.searchTextField.text
-        searchViewModel.searchWeather
+        viewModel.textFieldText = searchBar.searchTextField.text
+        viewModel.searchWeather
         searchBar.text = nil
     }
     
@@ -96,18 +97,9 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: WeatherViewModelDelegate {
     func didFetchWeather(weather: Weather) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if let weatherID = self.weatherViewModel.weatherID {
-                print(weatherID)
-                let bgColor = BackgroundColor(weatherID: weatherID)
-                let gradientView = AnimatedGradientView(frame: self.view.bounds)
-                gradientView.setGradient(startColor: bgColor.startColor, endColor: UIColor.white)
-                self.view.insertSubview(gradientView, at: 0)
-            }
-        }
+        viewModel.receiveWeather(weather: weather)
     }
-
+    
     func didFailToFetchWeather(error: Error) {
         showAlert(title: "에러", message: error.localizedDescription)
     }
@@ -115,14 +107,14 @@ extension SearchViewController: WeatherViewModelDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchViewModel.weatherList.count
+        return viewModel.weatherList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: WeatherCell.identifier,
             for: indexPath) as? WeatherCell else { return UICollectionViewCell() }
-        let weatherInfo = searchViewModel.weatherList[indexPath.item]
+        let weatherInfo = viewModel.weatherList[indexPath.item]
         cell.configure(info: weatherInfo)
         return cell
     }

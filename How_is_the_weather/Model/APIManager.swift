@@ -85,7 +85,7 @@ struct Weather {
     let name: String
     let id: Int
     let description: String
-    let temperature: Double
+    var temperature: Double
     
     init?(json: JSON) {
         guard let name = json["name"].string,

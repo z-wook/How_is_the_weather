@@ -9,19 +9,27 @@ import UIKit
 import SnapKit
 
 final class TabBarController: UITabBarController {
+    private let gpsManager = GPSManager()
     private let viewModel = WeatherViewModel()
     private let tabBarView = TabBarView()
     private let weatherVC = WeatherView()
     private let searchVC = SearchViewController()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         viewModel.delegate = self
-        viewModel.fetchWeatherForCity("Seoul")
+        gpsManager.setLocationManager()
+        setUpGPSManagerClosure()
+        
+        
         configure()
         setLayout()
         configTabBarBtn()
     }
+    
 }
 
 private extension TabBarController {
@@ -29,6 +37,7 @@ private extension TabBarController {
         tabBar.isHidden = true
         navigationItem.title = "날씨어때"
         viewControllers = [weatherVC, searchVC]
+        
     }
     
     func setLayout() {
@@ -40,6 +49,8 @@ private extension TabBarController {
             $0.width.equalTo(280)
             $0.height.equalTo(65)
         }
+        
+        
     }
     
     func configTabBarBtn() {
@@ -73,7 +84,7 @@ extension TabBarController {
         gradientView.setGradient(startColor: bgColor.startColor, endColor: UIColor.white)
         self.view.insertSubview(gradientView, at: 0)
     }
-
+    
 }
 
 extension TabBarController: WeatherViewModelDelegate {
@@ -82,9 +93,24 @@ extension TabBarController: WeatherViewModelDelegate {
             setBackground(forWeatherID: weatherID)
         }
     }
-
+    
     func didFailToFetchWeather(error: Error) {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }
 }
 
+
+extension TabBarController {
+    private func setUpGPSManagerClosure() {
+        gpsManager.didUpdateLocation = { [weak self] latitude, longitude in
+            print("TabbarVC Closure called with latitude: \(latitude), longitude: \(longitude)")
+            
+            self?.gpsManager.getCityName(latitude: latitude, longitude: longitude) { cityName in
+                guard let cityName = cityName else { return }
+                
+                print("TabbarVC Closure called with cityName: \(cityName)")
+                self?.viewModel.fetchWeatherForCity(cityName)
+            }
+        }
+    }
+}

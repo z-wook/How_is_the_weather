@@ -4,14 +4,16 @@ import UIKit
 
 struct BackgroundColor {
     
-    private static let thunderstormColor = UIColor.darkGray
-    private static let drizzleColor = UIColor.lightGray
-    private static let rainColor = UIColor.blue
-    private static let snowColor = UIColor.white
-    private static let atmosphereColor = UIColor(white: 0.8, alpha: 1.0)
-    private static let tornadoColor = UIColor.red
-    private static let clearColor = UIColor.yellow
-    private static let cloudsColor = UIColor.gray
+    
+    private static let thunderstormColor = UIColor(hex: "#5E8A3B")
+    private static let drizzleColor = UIColor(hex: "#83919E")
+    private static let rainColor = UIColor(hex: "#83919E")
+    private static let snowColor = UIColor(hex: "#5797F6")
+    private static let atmosphereColor = UIColor(hex: "#F9A67EC")
+    private static let tornadoColor = UIColor(hex: "#0F1E23")
+    private static let clearColor = UIColor(hex: "#5FC9FC")
+    private static let cloudsColor = UIColor(hex: "#FACBEA")
+
     
     private(set) var startColor: UIColor
     

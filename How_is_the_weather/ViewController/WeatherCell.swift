@@ -12,7 +12,7 @@ final class WeatherCell: UICollectionViewCell {
     
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .regular)
         label.textColor = .label
         label.textAlignment = .left
         return label
@@ -28,7 +28,7 @@ final class WeatherCell: UICollectionViewCell {
     
     private lazy var temperatureLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.textColor = .label
         label.textAlignment = .left
         return label
@@ -82,6 +82,7 @@ final class WeatherCell: UICollectionViewCell {
         }
         let image = WeatherType(weatherID: id)?.getIcon
         weatheImageView.image = image
+        contentView.backgroundColor = .clear
     }
     
     override init(frame: CGRect) {

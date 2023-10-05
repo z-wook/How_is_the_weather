@@ -11,12 +11,9 @@ final class SearchViewController: UIViewController {
         view = searchView
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +24,7 @@ final class SearchViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-
         viewModel.weatherManager.delegate = self
-        
     }
     
     required init?(coder: NSCoder) {
@@ -69,6 +64,7 @@ private extension SearchViewController {
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .sidebar)
         listConfiguration.showsSeparators = false
         listConfiguration.trailingSwipeActionsConfigurationProvider = makeSwipeActions
+        listConfiguration.backgroundColor = UIColor.init(white: 0.9, alpha: 0.5)
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
     }
     

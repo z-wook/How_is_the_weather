@@ -1,8 +1,13 @@
+//
+//  WeatherClothes.swift
+//  How_is_the_weather
+//
+//  Created by t2023-m0070 on 10/3/23.
+//
 
 import UIKit
 
-
-class ClothesImage {
+class WeatherClothes {
     
     private var weatherType: WeatherType?
     
@@ -13,29 +18,23 @@ class ClothesImage {
     var images: [UIImage] {
         switch weatherType {
         case .thunderstorm:
-            return loadImages(named: ["thunderstormClothes1", "thunderstormClothes2"])
+            return loadImages(named: ["raincoat", "t-shirt", "long-sleeves", "skinny", "denim"])
         case .drizzle:
-            return loadImages(named: ["drizzleClothes1", "drizzleClothes2"])
+            return loadImages(named: ["raincoat", "t-shirt", "long-sleeves", "skinny", "denim"])
         case .none:
             return []
         case .some(.rain):
-            return []
-
+            return loadImages(named: ["raincoat", "t-shirt", "long-sleeves", "denim", "pants"])
         case .some(.snow):
-            return []
-
+            return loadImages(named: ["jacket", "turtleneck", "long-sleeves", "hoody", "denim", "skinny" ])
         case .some(.atmosphere):
             return []
-
         case .some(.tornado):
-            return []
-
+            return loadImages(named: ["jacket", "windbreaker", "hoody", "long-sleeves", "skinny", "denim"])
         case .some(.clear):
-            return []
-
+            return loadImages(named: ["t-shirt", "long-sleeves", "denim", "pants"])
         case .some(.clouds):
-            return []
-
+            return loadImages(named: ["t-shirt", "long-sleeves", "denim", "pants"])
         }
     }
     

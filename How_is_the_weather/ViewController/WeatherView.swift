@@ -19,6 +19,14 @@ class WeatherView : UIViewController {
     var temperature = UIButton(type: .system)
     var locationButton = UIButton()
     
+    let clothesStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 10
+        stack.distribution = .fillEqually
+        return stack
+    }()
+    
     private let viewModel = WeatherViewModel()
 
     var city = UILabel()
@@ -47,8 +55,15 @@ class WeatherView : UIViewController {
         imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         return imageView
     }()
-    
 
+    //MARK - Clothes 이미지뷰
+    lazy var clothesView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "clothesView")
+        imageView.frame = CGRect(x: 0, y: 0, width: 350, height: 250)
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
@@ -105,6 +120,8 @@ class WeatherView : UIViewController {
         view.addSubview(city)
         view.addSubview(sunImageView)
         view.addSubview(locationButton)
+        view.addSubview(clothesView)
+        view.addSubview(clothesStackView)
         
         temperature.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(130)
@@ -122,6 +139,17 @@ class WeatherView : UIViewController {
         locationButton.snp.makeConstraints { make in
             make.centerY.equalTo(city)
             make.centerX.equalTo(sunImageView)
+        }
+        clothesView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-200)
+            make.height.equalTo(100)
+        }
+        
+       
+        clothesStackView.snp.makeConstraints {
+            $0.left.equalTo(clothesView.snp.left).offset(30)
+            $0.top.equalTo(clothesView.snp.top).offset(10)
         }
     }
 }
@@ -141,14 +169,13 @@ extension WeatherView: WeatherViewModelDelegate {
                 bgColor.frame = self.view.bounds
                 self.view.layer.insertSublayer(bgColor, at: 0)
                 
-                let clothesImage = ClothesImage(weatherID: weatherID)
+                let clothesImage = WeatherClothes(weatherID: weatherID)
                 for image in clothesImage.images {
                     let imageView = UIImageView(image: image)
                     imageView.contentMode = .scaleAspectFit
                     self.clothesStackView.addArrangedSubview(imageView)
                 }
             }
-
             self.temperature.setTitle(self.viewModel.temperatureText, for: .normal)
             self.temperature.titleLabel?.font = UIFont.systemFont(ofSize: 80)
             self.city.text = self.viewModel.cityName

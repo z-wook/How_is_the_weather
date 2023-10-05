@@ -91,6 +91,7 @@ private extension SearchViewController {
     
     @objc func refresh() {
         searchView.refreshControl.beginRefreshing()
+        viewModel.type = .celsius
         viewModel.loadWeatherList
     }
 }

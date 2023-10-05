@@ -13,7 +13,6 @@
 		08B7D0AD2AC174140019DD9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 08B7D0AC2AC174140019DD9F /* Alamofire */; };
 		08B7D0B02AC1742E0019DD9F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0AF2AC1742E0019DD9F /* APIManager.swift */; };
 		08B7D0B32AC1744F0019DD9F /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B7D0B22AC1744F0019DD9F /* WeatherViewModel.swift */; };
-		08C7B0F32ACD58250037AA61 /* WeatherClothes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7B0F22ACD58250037AA61 /* WeatherClothes.swift */; };
 		08C7B0F52ACD586D0037AA61 /* BackgroundColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C7B0F42ACD586D0037AA61 /* BackgroundColorHelper.swift */; };
 		10B598272AC43D8F005FC7C8 /* GPSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B598262AC43D8F005FC7C8 /* GPSManager.swift */; };
 		332A0CB32AC48B6700BB9677 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332A0CB22AC48B6700BB9677 /* Store.swift */; };

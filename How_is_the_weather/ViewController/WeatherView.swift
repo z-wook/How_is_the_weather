@@ -31,17 +31,6 @@ class WeatherView : UIViewController {
 
     var city = UILabel()
 
-
-    
-    let clothesStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 10
-        stack.distribution = .fillEqually
-        return stack
-    }()
-    
-
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "sun")
@@ -160,11 +149,6 @@ extension WeatherView: WeatherViewModelDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
-                print(weatherID)
-                
-                if let weatherIcon = WeatherIcons.getWeatherIcon(result: weatherID) {
-                    self.sunImageView.image = weatherIcon
-                }
                 let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
                 bgColor.frame = self.view.bounds
                 self.view.layer.insertSublayer(bgColor, at: 0)

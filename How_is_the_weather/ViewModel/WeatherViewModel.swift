@@ -65,15 +65,12 @@ class WeatherViewModel {
         case .celsius:
             let temperature = temperatureManager.fahrenheitToCelsius(fahrenheit: weatherData?.temperature)
             weatherData?.temperature = temperature
-            print("======> temp: \(temperature)")
             return "\(Int(round(temperature))) °C"
             
         case .fahrenheit:
             let temperature = temperatureManager.celsiusToFahrenheit(celsius: weatherData?.temperature)
             weatherData?.temperature = temperature
-            print("~~~~~~~~> temp: \(temperature)")
             return "\(Int(round(temperature))) °F"
-
         }
     }
 }

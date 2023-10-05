@@ -52,7 +52,7 @@ class WeatherView : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        viewModel.fetchWeatherForCity("Seoul")
+        viewModel.fetchWeatherForCity("london")
       
         setlayout()
         makeTemperature()
@@ -68,6 +68,11 @@ class WeatherView : UIViewController {
         temperature.backgroundColor = .none
         temperature.frame = CGRect(x: 400, y: 400, width: 300, height: 300)
         temperature.addTarget(self, action: #selector(changeUnit), for: .touchUpInside)
+    }
+    
+    @objc private func changeUnit(_ sender: UIButton) {
+        viewModel.type = viewModel.type == .celsius ? .fahrenheit : .celsius
+        sender.setTitle(viewModel.changeUnit, for: .normal)
     }
     
     func makeLocationButton() {
@@ -135,19 +140,19 @@ extension WeatherView: WeatherViewModelDelegate {
                 let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
                 bgColor.frame = self.view.bounds
                 self.view.layer.insertSublayer(bgColor, at: 0)
+                
+                let clothesImage = ClothesImage(weatherID: weatherID)
+                for image in clothesImage.images {
+                    let imageView = UIImageView(image: image)
+                    imageView.contentMode = .scaleAspectFit
+                    self.clothesStackView.addArrangedSubview(imageView)
+                }
             }
 
             self.temperature.setTitle(self.viewModel.temperatureText, for: .normal)
             self.temperature.titleLabel?.font = UIFont.systemFont(ofSize: 80)
             self.city.text = self.viewModel.cityName
             sunImageView.image = WeatherType(weatherID: weather.id)?.getIcon
-
-            let clothesImage = ClothesImage(weatherID: weatherID)
-            for image in clothesImage.images {
-                let imageView = UIImageView(image: image)
-                imageView.contentMode = .scaleAspectFit
-                self.clothesStackView.addArrangedSubview(imageView)
-            }
         } 
     }
 
@@ -160,13 +165,5 @@ extension WeatherView: GPSManagerDelegate {
     func didGetGPS(latitude: Double, longitude: Double) {
         gpsController.setLocationManager()
         viewModel.fetchWeatherForLocation(latitude, longitude)
-    }
-}
-
-
-    
-    @objc private func changeUnit(_ sender: UIButton) {
-        viewModel.type = viewModel.type == .celsius ? .fahrenheit : .celsius
-        sender.setTitle(viewModel.changeUnit, for: .normal)
     }
 }

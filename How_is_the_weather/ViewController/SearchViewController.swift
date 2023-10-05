@@ -28,7 +28,7 @@ final class SearchViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
 
-        viewModel.manager.delegate = self
+        viewModel.weatherManager.delegate = self
         
     }
     

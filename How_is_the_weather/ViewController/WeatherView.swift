@@ -117,7 +117,7 @@ extension WeatherView: WeatherViewModelDelegate {
             let temperature = Int(weather.temperature)
             let clothesImages = WeatherClothes(temperature: temperature)
             clothesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
+    
             for image in clothesImages.images {
                 let imageView = UIImageView(image: image)
                 imageView.contentMode = .scaleAspectFit

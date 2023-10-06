@@ -21,9 +21,9 @@ class WeatherClothes {
         case .littleColdTemp:
             return loadImages(named: ["skinny", "hoody", "long-sleeves", "windbreaker"])
         case .littleHotTemp:
-            return loadImages(named: ["sleeve", "pants", "shorts"])
+            return loadImages(named: ["long-sleeves", "pants", "t-shirt", "windbreaker"])
         case .hotTemp:
-            return loadImages(named: ["t-shirt", "dennim", "sandals"])
+            return loadImages(named: ["t-shirt", "dennim", "pants", "windbreaker"])
         case .none:
             return []
         }
@@ -35,9 +35,12 @@ class WeatherClothes {
         for name in names {
             if let image = UIImage(named: name) {
                 result.append(image)
+            } else {
+                print("Failed to load image named: \(name)")
             }
         }
         return result
     }
+
 }
 

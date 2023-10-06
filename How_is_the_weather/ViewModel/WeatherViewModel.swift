@@ -28,17 +28,15 @@ class WeatherViewModel {
     var weatherID: Int? {
         return weatherData?.id
     }
-
+    
     init(apiManager: APIManager = APIManager()) {
         self.apiManager = apiManager
     }
-    func fetchWeatherForCurrentLocation()
-    { gpsmanager.locationManager}
     
     func fetchWeatherForCity(_ city: String) {
         apiManager.fetchWeather(forCity: city) { [weak self] result in
             guard let self = self else { return }
-
+            
             switch result {
             case .success(let weather):
                 self.weatherData = weather
@@ -49,7 +47,7 @@ class WeatherViewModel {
         }
     }
     
-
+    
     func fetchWeatherForLocation(_ latitude: Double, _ longitude: Double) {
         apiManager.fetchWeather(forLatitude: latitude, longitude: longitude) { [weak self] result in
             guard let self = self else { return }

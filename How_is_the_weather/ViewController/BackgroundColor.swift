@@ -9,10 +9,10 @@ struct BackgroundColor {
     private static let drizzleColor = UIColor(hex: "#83919E")
     private static let rainColor = UIColor(hex: "#83919E")
     private static let snowColor = UIColor(hex: "#5797F6")
-    private static let atmosphereColor = UIColor(hex: "#F9A67EC")
+    private static let atmosphereColor = UIColor(hex: "#F9A67E")
     private static let tornadoColor = UIColor(hex: "#0F1E23")
-    private static let clearColor = UIColor(hex: "#5FC9FC")
-    private static let cloudsColor = UIColor(hex: "#FACBEA")
+    private static let clearColor = UIColor(hex: "#A4EBF3")
+    private static let cloudsColor = UIColor(hex: "#ECF9FF")
 
     
     private(set) var startColor: UIColor
@@ -27,7 +27,7 @@ struct BackgroundColor {
     
     init(weatherID: Int) {
         let weatherType = WeatherType(weatherID: weatherID)
-        
+        print("weatherType:::: \(weatherID)")
         switch weatherType {
         case .thunderstorm:
             startColor = BackgroundColor.thunderstormColor
@@ -48,5 +48,6 @@ struct BackgroundColor {
         case .none:
             startColor = UIColor.black
         }
+        print(startColor)
     }
 }

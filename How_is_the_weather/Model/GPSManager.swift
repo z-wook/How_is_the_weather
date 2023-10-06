@@ -24,6 +24,7 @@ class GPSManager: NSObject, CLLocationManagerDelegate {
     // GPS setting
     func setLocationManager() {
         
+        print("setLocationManager")
         locationManager.delegate = self
         
         //위치추적권한요청 when in foreground

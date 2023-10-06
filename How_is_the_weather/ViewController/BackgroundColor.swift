@@ -12,7 +12,7 @@ struct BackgroundColor {
     private static let atmosphereColor = UIColor(hex: "#F9A67E")
     private static let tornadoColor = UIColor(hex: "#0F1E23")
     private static let clearColor = UIColor(hex: "#5FC9FC")
-    private static let cloudsColor = UIColor(hex: "#5FC9FC")
+    private static let cloudsColor = UIColor(hex: "#9978C5")
 
     
     private(set) var startColor: UIColor

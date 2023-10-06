@@ -58,5 +58,6 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
-
+Store.swift
+How_is_the_weatherTests/
 # End of https://www.toptal.com/developers/gitignore/api/macos

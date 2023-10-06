@@ -27,16 +27,10 @@ class WeatherView : UIViewController {
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "sun")
-        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
-    let cloudsImageView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "cloud")
-        imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        return imageView
-    }()
+
     
     //MARK - Clothes 이미지뷰
     lazy var clothesView : UIImageView = {
@@ -85,8 +79,8 @@ class WeatherView : UIViewController {
     }
     
     func makeCity() {
-        city.textColor = .black
-        city.font = .systemFont(ofSize: 20)
+        city.textColor = .white
+        city.font = .systemFont(ofSize: 18)
     }
     func setlayout() {
         view.addSubview(temperature)
@@ -102,16 +96,16 @@ class WeatherView : UIViewController {
         }
         city.snp.makeConstraints { make in
             make.top.equalTo(temperature.snp.bottom)
-            make.centerX.equalTo(temperature)
+            make.leading.equalTo(temperature).offset(40)
         }
         sunImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(temperature.snp.centerY)
-            make.left.equalTo(temperature.snp.right).offset(20)
-            make.right.equalToSuperview().offset(-30)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(city.snp.bottom).offset(15)
+            make.width.height.equalTo(120)
         }
         locationButton.snp.makeConstraints { make in
             make.centerY.equalTo(city)
-            make.centerX.equalTo(sunImageView)
+            make.leading.equalTo(city.snp.trailing).offset(20)
         }
         clothesView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()

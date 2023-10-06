@@ -47,6 +47,7 @@ final class SearchView: UIView {
         view.register(WeatherCell.self, forCellWithReuseIdentifier: WeatherCell.identifier)
         view.layer.cornerRadius = 30
         view.refreshControl = refreshControl
+        view.backgroundColor = .clear
         return view
     }()
     

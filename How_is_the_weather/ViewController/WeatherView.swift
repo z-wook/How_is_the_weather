@@ -3,18 +3,12 @@ import UIKit
 import SnapKit
 import CoreLocation
 
-//    var view = UIView()
-//    weatherview.frame = CGRect(x: 0, y: 0, width: 390, height: 844)
-//    var shadows = UIView()
-//    shadows.frame = weatherView.frame
-//    shadows.clipsToBounds = false
-//    self.view.addSubview(shadows)
-
 class WeatherView : UIViewController {
-
-    let gpsController = GPSManager()
-    let apiManager = APIManager()
-    let temperatureManager = TemperatureManager()
+    
+    private let gpsManager = GPSManager()
+    private let apiManager = APIManager()
+    private let temperatureManager = TemperatureManager()
+    private let viewModel = WeatherViewModel()
     
     var temperature = UIButton(type: .system)
     var locationButton = UIButton()
@@ -27,18 +21,17 @@ class WeatherView : UIViewController {
         return stack
     }()
     
-    private let viewModel = WeatherViewModel()
-
+    
     var city = UILabel()
-
+    
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "sun")
-        imageView.frame = CGRect(x: 100, y: 100, width: 300, height: 300)
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
+    
     //MARK - Clothes 이미지뷰
     lazy var clothesView : UIImageView = {
         let imageView = UIImageView()
@@ -50,13 +43,13 @@ class WeatherView : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        viewModel.fetchWeatherForCity("london")
-      
+        gpsManager.delegate = self
+        
         setlayout()
         makeTemperature()
         makeCity()
         makeLocationButton()
-        gpsController.setLocationManager()
+        gpsManager.setLocationManager()
     }
     
     func makeTemperature() {
@@ -82,18 +75,7 @@ class WeatherView : UIViewController {
     }
     @objc func refreshLocation(){
         
-        didGetGPS(latitude: gpsController.lat, longitude: gpsController.lon)
-//        gpsController.setLocationManager()
-//        viewModel.fetchWeatherForLocation(gpsController.lat, gpsController.lon)
-//        apiManager.fetchWeather(forLatitude: gpsController.lat, longitude: gpsController.lon) { result in
-//            switch result {
-//            case.success(let weather):
-//                self.temperature.setTitle(String(weather.temperature), for: .normal)
-//                self.city.text = String(weather.name)
-//            case.failure(let error):
-//                print(error)
-//            }
-//        }
+        didGetGPS(latitude: gpsManager.lat, longitude: gpsManager.lon)
     }
     
     func makeCity() {
@@ -131,7 +113,7 @@ class WeatherView : UIViewController {
             make.height.equalTo(100)
         }
         
-       
+        
         clothesStackView.snp.makeConstraints {
             $0.left.equalTo(clothesView.snp.left).offset(30)
             $0.top.equalTo(clothesView.snp.top).offset(10)
@@ -145,9 +127,6 @@ extension WeatherView: WeatherViewModelDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if let weatherID = self.viewModel.weatherID {
-                let bgColor = BackgroundColor(weatherID: weatherID).gradientLayer
-                bgColor.frame = self.view.bounds
-                self.view.layer.insertSublayer(bgColor, at: 0)
                 
                 let clothesImage = WeatherClothes(weatherID: weatherID)
                 for image in clothesImage.images {
@@ -160,17 +139,25 @@ extension WeatherView: WeatherViewModelDelegate {
             self.temperature.setAttributedTitle(text, for: .normal)
             self.city.text = self.viewModel.cityName
             sunImageView.image = WeatherType(weatherID: weather.id)?.getIcon
-        } 
+        }
     }
-
+    
     func didFailToFetchWeather(error: Error) {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }
 }
 
+
+//MARK: - GPSManager Delegate
 extension WeatherView: GPSManagerDelegate {
     func didGetGPS(latitude: Double, longitude: Double) {
-        gpsController.setLocationManager()
-        viewModel.fetchWeatherForLocation(latitude, longitude)
+        print("WeatherView Delegate method called with latitude: \(latitude), longitude: \(longitude)")
+        
+        gpsManager.getCityName(latitude: latitude, longitude: longitude) { [weak self] cityName in
+            guard let self = self, let cityName = cityName else { return }
+            print("WeatherView Delegate method called with CitiName:\(cityName)")
+            
+            self.viewModel.fetchWeatherForCity(cityName)
+        }
     }
 }

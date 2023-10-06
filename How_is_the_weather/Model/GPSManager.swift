@@ -13,6 +13,9 @@ protocol GPSManagerDelegate: AnyObject {
 }
 
 class GPSManager: NSObject, CLLocationManagerDelegate {
+    var didUpdateLocation: ((Double, Double) -> Void)?
+    
+    weak var delegate: GPSManagerDelegate?
     
     var locationManager = CLLocationManager()
     var lat: CLLocationDegrees = .zero
@@ -38,11 +41,31 @@ class GPSManager: NSObject, CLLocationManagerDelegate {
             lon = location.coordinate.longitude
             print(lat)
             print(lon)
+            delegate?.didGetGPS(latitude: lat, longitude: lon)
+            didUpdateLocation?(lat, lon)
+            
         }
     }
-        
+    
     // 위치 가져오기 실패
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error")
     }
+    
+    
+    
+    // 좌표에 따른 도시명 가져오기
+    func getCityName(latitude: Double, longitude: Double, completion: @escaping (String?) -> Void) {
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let placemark = placemarks?.first, error == nil {
+                completion(placemark.locality) // returns city name
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
 }

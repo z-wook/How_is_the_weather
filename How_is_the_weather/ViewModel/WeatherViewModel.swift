@@ -9,6 +9,7 @@ protocol WeatherViewModelDelegate: AnyObject {
 class WeatherViewModel {
     
     weak var delegate: WeatherViewModelDelegate?
+    let gpsmanager = GPSManager()
     
     private let apiManager: APIManager
     private var weatherData: Weather?
@@ -31,6 +32,8 @@ class WeatherViewModel {
     init(apiManager: APIManager = APIManager()) {
         self.apiManager = apiManager
     }
+    func fetchWeatherForCurrentLocation()
+    { gpsmanager.locationManager}
     
     func fetchWeatherForCity(_ city: String) {
         apiManager.fetchWeather(forCity: city) { [weak self] result in

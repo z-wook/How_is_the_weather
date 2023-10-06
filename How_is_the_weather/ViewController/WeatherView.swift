@@ -16,25 +16,11 @@ class WeatherView : UIViewController {
     private lazy var clothesStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.backgroundColor = .clear
         stack.spacing = 20
-        stack.layoutMargins = UIEdgeInsets(top: 75, left: 25, bottom: 75, right: 25)
+        stack.layoutMargins = UIEdgeInsets(top: 50, left: 25, bottom: 50, right: 25)
         stack.isLayoutMarginsRelativeArrangement = true
-        
-        // 그림자 효과
-        stack.layer.shadowColor = UIColor.black.cgColor
-        stack.layer.shadowOffset = CGSize(width: 0, height: 2)
-        stack.layer.shadowOpacity = 0.3
-        stack.layer.shadowRadius = 5
-        
-        // 블러 효과
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = stack.bounds
-        blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurredEffectView.layer.cornerRadius = 30
-        blurredEffectView.clipsToBounds = true
-        stack.insertSubview(blurredEffectView, at: 0)
+                stack.backgroundColor = UIColor.init(white: 0.9, alpha: 0.5)
+        stack.layer.cornerRadius = 30
         return stack
     }()
 
@@ -44,9 +30,6 @@ class WeatherView : UIViewController {
     
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.shadowOffset = CGSize(width: 2, height: 2)
-        imageView.layer.shadowRadius = 2
-        imageView.layer.shadowOpacity = 0.5
         imageView.contentMode = .scaleAspectFit
             return imageView
     }()
@@ -57,7 +40,6 @@ class WeatherView : UIViewController {
         super.viewDidLoad()
         viewModel.delegate = self
         gpsManager.delegate = self
-        
         setlayout()
         makeTemperature()
         makeCity()
@@ -71,10 +53,6 @@ class WeatherView : UIViewController {
         temperature.titleLabel?.font = .systemFont(ofSize: 100)
         temperature.setTitleColor(UIColor.white, for: .normal)
         temperature.frame = CGRect(x: 400, y: 400, width: 300, height: 300)
-        temperature.titleLabel?.layer.shadowColor = UIColor.black.cgColor
-        temperature.titleLabel?.layer.shadowOffset = CGSize(width: 2, height: 2)
-        temperature.titleLabel?.layer.shadowRadius = 2
-        temperature.titleLabel?.layer.shadowOpacity = 0.5
         temperature.addTarget(self, action: #selector(changeUnit), for: .touchUpInside)
     }
     
@@ -87,10 +65,6 @@ class WeatherView : UIViewController {
     func makeLocationButton() {
         locationButton.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
         locationButton.tintColor = UIColor.black
-        locationButton.layer.shadowColor = UIColor.black.cgColor
-        locationButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        locationButton.layer.shadowRadius = 2
-        locationButton.layer.shadowOpacity = 0.5
         locationButton.addTarget(self, action: #selector(refreshLocation), for: .touchUpInside)
     }
     
@@ -101,9 +75,6 @@ class WeatherView : UIViewController {
     func makeCity() {
         city.textColor = .white
         city.font = .systemFont(ofSize: 18)
-        city.layer.shadowOffset = CGSize(width: 2, height: 2)
-        city.layer.shadowRadius = 2
-        city.layer.shadowOpacity = 0.5
     }
     
     func setlayout() {
@@ -123,8 +94,8 @@ class WeatherView : UIViewController {
         }
         sunImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(city.snp.bottom).offset(15)
-            make.width.height.equalTo(120)
+            make.top.equalTo(city.snp.bottom).offset(30)
+            make.width.height.equalTo(100)
         }
         locationButton.snp.makeConstraints { make in
             make.centerY.equalTo(city)
@@ -132,7 +103,7 @@ class WeatherView : UIViewController {
         }
         clothesStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(sunImageView.snp.bottom).offset(30)
+            $0.top.equalTo(sunImageView.snp.bottom).offset(75)
         }
     }
 }
@@ -145,7 +116,7 @@ extension WeatherView: WeatherViewModelDelegate {
             
             let temperature = Int(weather.temperature)
             let clothesImages = WeatherClothes(temperature: temperature)
-          clothesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            clothesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
             for image in clothesImages.images {
                 let imageView = UIImageView(image: image)

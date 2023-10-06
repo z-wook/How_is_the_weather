@@ -75,3 +75,26 @@ enum WeatherType {
         }
     }
 }
+
+
+enum TemperatureTypes {
+    case coldTemp
+    case littleColdTemp
+    case littleHotTemp
+    case hotTemp
+        
+    init?(temperature: Int) {
+        switch temperature {
+        case 0...10:
+            self = .coldTemp
+        case 11...20:
+            self = .littleColdTemp
+        case 21...25:
+            self = .littleHotTemp
+        case 26...40:
+            self = .hotTemp
+        default:
+            return nil
+        }
+    }
+}

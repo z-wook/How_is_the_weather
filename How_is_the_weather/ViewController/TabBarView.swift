@@ -36,7 +36,6 @@ final class TabBarView: UIView {
         stack.layer.shadowOffset = CGSize(width: 0, height: 2) // 그림자의 위치 (수평, 수직)
         stack.layer.shadowOpacity = 0.5 // 그림자 투명도
         stack.layer.shadowRadius = 10 // 그림자 반경
-        
         [sunBtn, globalBtn].forEach {
             stack.addArrangedSubview($0)
         }

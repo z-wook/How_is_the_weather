@@ -6,35 +6,26 @@
 //
 
 import UIKit
-
 class WeatherClothes {
     
-    private var weatherType: WeatherType?
+    private var temperatureType: TemperatureTypes?
     
-    init(weatherID: Int) {
-        self.weatherType = WeatherType(weatherID: weatherID)
+    init(temperature: Int) {
+        self.temperatureType = TemperatureTypes(temperature: temperature)
     }
     
     var images: [UIImage] {
-        switch weatherType {
-        case .thunderstorm:
-            return loadImages(named: ["raincoat", "t-shirt", "long-sleeves", "skinny", "denim"])
-        case .drizzle:
-            return loadImages(named: ["raincoat", "t-shirt", "long-sleeves", "skinny", "denim"])
+        switch temperatureType {
+        case .coldTemp:
+            return loadImages(named: ["jacket", "turtleneck", "skinny", "anorak"])
+        case .littleColdTemp:
+            return loadImages(named: ["skinny", "hoody", "long-sleeves", "windbreaker"])
+        case .littleHotTemp:
+            return loadImages(named: ["sleeve", "pants", "shorts"])
+        case .hotTemp:
+            return loadImages(named: ["t-shirt", "dennim", "sandals"])
         case .none:
             return []
-        case .some(.rain):
-            return loadImages(named: ["raincoat", "t-shirt", "long-sleeves", "denim", "pants"])
-        case .some(.snow):
-            return loadImages(named: ["jacket", "turtleneck", "long-sleeves", "hoody", "denim", "skinny" ])
-        case .some(.atmosphere):
-            return []
-        case .some(.tornado):
-            return loadImages(named: ["jacket", "windbreaker", "hoody", "long-sleeves", "skinny", "denim"])
-        case .some(.clear):
-            return loadImages(named: ["t-shirt", "long-sleeves", "denim", "pants"])
-        case .some(.clouds):
-            return loadImages(named: ["t-shirt", "long-sleeves", "denim", "pants"])
         }
     }
     
@@ -49,3 +40,4 @@ class WeatherClothes {
         return result
     }
 }
+

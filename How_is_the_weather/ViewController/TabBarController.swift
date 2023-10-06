@@ -19,7 +19,15 @@ final class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+
+         if let navController = weatherVC as? UINavigationController {
+             navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+         }
+
+         if let navController = searchVC as? UINavigationController {
+             navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+         }
         viewModel.delegate = self
         gpsManager.setLocationManager()
         setUpGPSManagerClosure()

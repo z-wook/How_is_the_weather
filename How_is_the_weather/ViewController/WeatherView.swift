@@ -13,32 +13,45 @@ class WeatherView : UIViewController {
     var temperature = UIButton(type: .system)
     var locationButton = UIButton()
     
-    let clothesStackView: UIStackView = {
+    private lazy var clothesStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.spacing = 10
-        stack.distribution = .fillEqually
+        stack.backgroundColor = .clear
+        stack.spacing = 20
+        stack.layoutMargins = UIEdgeInsets(top: 75, left: 25, bottom: 75, right: 25)
+        stack.isLayoutMarginsRelativeArrangement = true
+        
+        // 그림자 효과
+        stack.layer.shadowColor = UIColor.black.cgColor
+        stack.layer.shadowOffset = CGSize(width: 0, height: 2)
+        stack.layer.shadowOpacity = 0.3
+        stack.layer.shadowRadius = 5
+        
+        // 블러 효과
+        let blurEffect = UIBlurEffect(style: .light)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.frame = stack.bounds
+        blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurredEffectView.layer.cornerRadius = 30
+        blurredEffectView.clipsToBounds = true
+        stack.insertSubview(blurredEffectView, at: 0)
         return stack
     }()
+
     
     
     var city = UILabel()
     
     let sunImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "sun")
+        imageView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        imageView.layer.shadowRadius = 2
+        imageView.layer.shadowOpacity = 0.5
         imageView.contentMode = .scaleAspectFit
-        return imageView
+            return imageView
     }()
-
     
-    //MARK - Clothes 이미지뷰
-    lazy var clothesView : UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "clothesView")
-        imageView.frame = CGRect(x: 0, y: 0, width: 350, height: 250)
-        return imageView
-    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +70,11 @@ class WeatherView : UIViewController {
         temperature.setAttributedTitle(text, for: .normal)
         temperature.titleLabel?.font = .systemFont(ofSize: 100)
         temperature.setTitleColor(UIColor.white, for: .normal)
-        temperature.backgroundColor = .none
         temperature.frame = CGRect(x: 400, y: 400, width: 300, height: 300)
+        temperature.titleLabel?.layer.shadowColor = UIColor.black.cgColor
+        temperature.titleLabel?.layer.shadowOffset = CGSize(width: 2, height: 2)
+        temperature.titleLabel?.layer.shadowRadius = 2
+        temperature.titleLabel?.layer.shadowOpacity = 0.5
         temperature.addTarget(self, action: #selector(changeUnit), for: .touchUpInside)
     }
     
@@ -71,23 +87,30 @@ class WeatherView : UIViewController {
     func makeLocationButton() {
         locationButton.setImage(UIImage(systemName: "location.circle.fill"), for: .normal)
         locationButton.tintColor = UIColor.black
+        locationButton.layer.shadowColor = UIColor.black.cgColor
+        locationButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        locationButton.layer.shadowRadius = 2
+        locationButton.layer.shadowOpacity = 0.5
         locationButton.addTarget(self, action: #selector(refreshLocation), for: .touchUpInside)
     }
+    
     @objc func refreshLocation(){
-        
         didGetGPS(latitude: gpsManager.lat, longitude: gpsManager.lon)
     }
     
     func makeCity() {
         city.textColor = .white
         city.font = .systemFont(ofSize: 18)
+        city.layer.shadowOffset = CGSize(width: 2, height: 2)
+        city.layer.shadowRadius = 2
+        city.layer.shadowOpacity = 0.5
     }
+    
     func setlayout() {
         view.addSubview(temperature)
         view.addSubview(city)
         view.addSubview(sunImageView)
         view.addSubview(locationButton)
-        view.addSubview(clothesView)
         view.addSubview(clothesStackView)
         
         temperature.snp.makeConstraints { make in
@@ -107,16 +130,9 @@ class WeatherView : UIViewController {
             make.centerY.equalTo(city)
             make.leading.equalTo(city.snp.trailing).offset(20)
         }
-        clothesView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-200)
-            make.height.equalTo(100)
-        }
-        
-        
         clothesStackView.snp.makeConstraints {
-            $0.left.equalTo(clothesView.snp.left).offset(30)
-            $0.top.equalTo(clothesView.snp.top).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(sunImageView.snp.bottom).offset(30)
         }
     }
 }
@@ -126,22 +142,24 @@ extension WeatherView: WeatherViewModelDelegate {
     func didFetchWeather(weather: Weather) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            if let weatherID = self.viewModel.weatherID {
-                
-                let clothesImage = WeatherClothes(weatherID: weatherID)
-                for image in clothesImage.images {
-                    let imageView = UIImageView(image: image)
-                    imageView.contentMode = .scaleAspectFit
-                    self.clothesStackView.addArrangedSubview(imageView)
-                }
+            
+            let temperature = Int(weather.temperature)
+            let clothesImages = WeatherClothes(temperature: temperature)
+          clothesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+            for image in clothesImages.images {
+                let imageView = UIImageView(image: image)
+                imageView.contentMode = .scaleAspectFit
+                self.clothesStackView.addArrangedSubview(imageView)
             }
+            
             let text = NSMutableAttributedString.customTemperatureText(inputText: viewModel.temperatureText)
             self.temperature.setAttributedTitle(text, for: .normal)
             self.city.text = self.viewModel.cityName
             sunImageView.image = WeatherType(weatherID: weather.id)?.getIcon
         }
     }
-    
+
     func didFailToFetchWeather(error: Error) {
         print("Failed to fetch weather: \(error.localizedDescription)")
     }

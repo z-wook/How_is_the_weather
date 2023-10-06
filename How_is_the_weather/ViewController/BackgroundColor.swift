@@ -11,8 +11,8 @@ struct BackgroundColor {
     private static let snowColor = UIColor(hex: "#5797F6")
     private static let atmosphereColor = UIColor(hex: "#F9A67E")
     private static let tornadoColor = UIColor(hex: "#0F1E23")
-    private static let clearColor = UIColor(hex: "#A4EBF3")
-    private static let cloudsColor = UIColor(hex: "#ECF9FF")
+    private static let clearColor = UIColor(hex: "#5FC9FC")
+    private static let cloudsColor = UIColor(hex: "#5FC9FC")
 
     
     private(set) var startColor: UIColor

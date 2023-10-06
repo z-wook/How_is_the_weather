@@ -68,6 +68,7 @@ private extension SearchViewController {
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
     }
     
+
     func makeSwipeActions(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
         guard let indexPath = indexPath else { return nil }
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
